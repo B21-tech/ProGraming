@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f9f9f9;
+    }
+
+    .container {
+      width: 900px;
+      height: 550px;
+      display: flex;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-panel {
+      width: 50%;
+      background: #0066ff;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .left-panel h1 {
+      font-size: 2.5em;
+      text-align: center;
+    }
+
+    .right-panel {
+      width: 50%;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-panel h2 {
+      font-size: 2.2em;
+      color: #0066ff;
+      margin-bottom: 20px;
+    }
+
+    form label {
+      font-size: 0.9em;
+      margin: 10px 0 5px;
+      display: block;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password a {
+      font-size: 0.8em;
+      color: #888;
+      text-decoration: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: #b55fff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 0.8em;
+      margin: 15px 0;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ccc;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      background: white;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .google-btn img {
+      width: 20px;
+    }
+
+    .signup-text {
+      font-size: 0.85em;
+      text-align: center;
+    }
+
+    .signup-text a {
+      color: orange;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .message {
+      font-size: 0.9em;
+      color: green;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h1>Welcome<br>Back !</h1>
+    </div>
+    <div class="right-panel">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label>Email or Username</label>
+        <input type="text" id="username" placeholder="Enter email or username" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+
+        <div class="forgot-password">
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Log In</button>
+
+        <div class="divider">Or Continue with</div>
+
+        <button type="button" class="google-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo">
+          Continue with Google
+        </button>
+
+        <p class="signup-text">Don't have an account? <a href="#">Sign Up here</a></p>
+
+        <p class="message" id="message"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // prevents page refresh
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (username && password) {
+        // Simulate successful login
+        message.textContent = `🔐 Login submitted for ${username}`;
+      } else {
+        message.textContent = "⚠️ Please fill in all fields.";
+        message.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
