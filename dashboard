@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProGaming Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: #111827; /* dark gray */
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+    }
+
+    header .logo {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    header nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    header nav a:hover {
+      color: #fff;
+    }
+
+    header .profile {
+      font-size: 14px;
+      text-align: right;
+    }
+
+    /* Main Layout */
+    .container {
+      padding: 20px 40px;
+    }
+
+    .greeting {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2563eb; /* blue */
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    /* Cards */
+    .card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin: 0 0 15px 0;
+      font-size: 18px;
+    }
+
+    /* Course main card */
+    .course-card {
+      background: #2563eb; /* blue */
+      color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .course-card button {
+      background: #fff;
+      color: #2563eb;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .course-card button:hover {
+      background: #e5e7eb;
+    }
+
+    /* Recommendations */
+    .recommendations {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .recommend-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .recommend-card h4 {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .recommend-card button {
+      margin-top: 10px;
+      background: #fbbf24; /* yellow */
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #111;
+      transition: 0.3s;
+    }
+
+    .recommend-card button:hover {
+      background: #f59e0b;
+    }
+
+    /* Right Section */
+    .streak-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .streak-card h4 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .streak-icons {
+      font-size: 22px;
+      color: #22c55e; /* green */
+      margin-bottom: 15px;
+    }
+
+    .progress {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: #9333ea; /* purple */
+    }
+
+    /* Career section */
+    .career-card {
+      background: #2563eb; /* blue */
+      color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .career-card button {
+      margin-top: 10px;
+      background: #fff;
+      color: #2563eb;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .career-card button:hover {
+      background: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">ProGaming</div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Courses</a>
+      <a href="#">Career Path</a>
+    </nav>
+    <div class="profile">Hi, Username<br><small>username@email.com</small></div>
+  </header>
+
+  <div class="container">
+    <div class="greeting">Good Morning, Username!</div>
+
+    <div class="grid">
+      <!-- Left side -->
+      <div>
+        <div class="card">
+          <h3>Continue Learning/Get started</h3>
+          <div class="course-card">
+            <div>
+              <h3>Python</h3>
+              <p>Learn the most popular language in the world</p>
+            </div>
+            <button>Resume learning</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Recommended for you</h3>
+          <div class="recommendations">
+            <div class="recommend-card">
+              <h4>JavaScript</h4>
+              <button>Start Language</button>
+            </div>
+            <div class="recommend-card">
+              <h4>HTML and CSS</h4>
+              <button>Start Language</button>
+            </div>
+            <div class="recommend-card">
+              <h4>C#</h4>
+              <button>Start Language</button>
+            </div>
+            <div class="recommend-card">
+              <h4>Python Challenge</h4>
+              <button>Start Challenge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div>
+        <div class="streak-card">
+          <h4>You’re on a 5-day Streak! ⚡</h4>
+          <div class="streak-icons">✅ ✅ ✅ ✅ ✅</div>
+          <h4>Top Courses of the week</h4>
+          <div class="progress">
+            Python (100 pts)
+            <div class="progress-bar"><span style="width:100%"></span></div>
+          </div>
+          <div class="progress">
+            C# (70 pts)
+            <div class="progress-bar"><span style="width:70%"></span></div>
+          </div>
+        </div>
+
+        <div class="career-card">
+          <h3>Check out different career paths in IT!</h3>
+          <button>View Careers</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
