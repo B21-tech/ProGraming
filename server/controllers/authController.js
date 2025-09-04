@@ -53,7 +53,7 @@ export const register = async (req, res) => {
             // get email from the request body
             to: email,
             subject: 'Welcome to ProGaming!',
-            text: "Welcome to ProGaming, your account has been created with email id: " +email
+            text: "Welcome to ProGaming, your account has been successfully created!"
         }
         // sending the email to the user
         await transporter.sendMail(mailOptions);
@@ -108,11 +108,14 @@ export const login = async (req, res) => {
 // Code for user to verify their account 
 export const sendVerifyOtp = async (req, res)=>{
     try {
-        const {userId} = req.body;
+        const userId = req.userId;
         const user = await userModel.findById(userId);
 
+        if (!user) 
+            return res.json({ success: false, message: "User not found" });
+
         if(user.isAccountVerified){
-            return json({success: flase, message: "Account already verified"})
+            return res.json({success: false, message: "Account already verified"})
         }
         // generating a six digit number for verification
         const otp = String(Math.floor(100000 + Math.random() * 900000));
@@ -129,7 +132,7 @@ export const sendVerifyOtp = async (req, res)=>{
             from: "ProGaming" + process.env.SENDER_EMAIL,
             to: user.email,
             subject: 'Account Verification OTP',
-            text: 'Your OTP is ' + otp + 'please verify your account using this OTP. Do not share with anyone else.'
+            text: 'Your OTP is ' + otp + '. Please verify your account using this OTP. Do not share with anyone else.'
         }
         await transporter.sendMail(mailOption);
 
@@ -156,7 +159,8 @@ export const logout = async (req, res) => {
 
 export const verifyEmail = async (req, res) =>{
     // user id and OTP
-    const {userId, otp} = req.body;
+    const { otp } = req.body;
+    const userId = req.userId;
 
     if(!userId || !otp){
         // returning a response 

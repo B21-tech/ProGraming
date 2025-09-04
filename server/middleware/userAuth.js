@@ -1,9 +1,9 @@
 // function that will find the token from the cookie 
-import { JsonWebTokenError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const userAuth = async (req, res, next)=>{
     // get token from cookie
-    const {token} = req.cookie;
+    const {token} = req.cookies;
 
     if(!token){
         return res.json({success: false, message: "Not Authorized. Login Again"})
@@ -11,10 +11,10 @@ const userAuth = async (req, res, next)=>{
 
     try {
         // decoding the token
-        const toeknDecoded = jwt.verify(token, process.env.JWT_SECRET);
+        const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        if(toeknDecoded.id){
-           req.body.userId = toeknDecoded.id 
+        if(tokenDecoded.id){
+           req.userId = tokenDecoded.id 
         }
         else{
             return res.json({success: false, message: 'Not Authorized. Please login again'});
