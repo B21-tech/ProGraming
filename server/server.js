@@ -23,5 +23,7 @@ app.use(cors({credentials: true}));
 app.get('/', (req, res)=> res.send("API working"));
 app.use('/api/ProGraming', authRouter);
 
+// verify user (otp number)
+app.use('/api/ProGraming', authRouter);
 // printing message on terminal
 app.listen(port, ()=> console.log('Sever started on port: '+ port));
