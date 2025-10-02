@@ -9,6 +9,7 @@ import authRouter from './routes/authRoutes.js';
 import userRouter from "./routes/userRoutes.js";
 
 
+
 const app = express();
 // port number 
 const port= process.env.PORT || 4000;
@@ -30,6 +31,11 @@ app.use(cors({
 app.get('/', (req, res)=> res.send("API working"));
 app.use('/api/authorize', authRouter);
 app.use('/api/user', userRouter);
+
+// API endpoint
+app.get('/', (req, res)=> res.send("API working"));
+app.use('/api/ProGraming', authRouter);
+
 
 // verify user (otp number)
 app.use('/api/ProGraming', authRouter);
