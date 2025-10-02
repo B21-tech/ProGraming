@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email</title>
+
+    <style>
+        /* General Page Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            background-size: cover;
+        }
+
+        /* Center Card */
+        .card {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Icon */
+        .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        /* Heading */
+        .card h2 {
+            margin: 10px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Subtext */
+        .card p {
+            margin: 5px 0 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* Input Field */
+        .card input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .card input:focus {
+            border-color: #9333ea;
+            box-shadow: 0 0 5px rgba(147, 51, 234, 0.4);
+        }
+
+        /* Button */
+        .btn {
+            background: #9333ea;
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #7e22ce;
+        }
+
+        /* Links */
+        .card a {
+            display: block;
+            margin-top: 15px;
+            font-size: 13px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Message Box */
+        #signupMessage,
+        #verifyMessage {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="icon">🔑</div>
+        <h2>Please Verify your email</h2>
+        <p>Enter the 6 digit code sent to your email</p>
+
+        <form id="verifyForm">
+            <input type="text" id="otp" placeholder="Enter OTP" required>
+            <button type="submit" class="btn">Verify and Continue</button>
+        </form>
+
+        <p id="verifyMessage"></p>
+        <a href="#" id="resendOtp">Resend code</a>
+    </div>
+
+    <script src="./src/verify.js"></script>
+</body>
+
+</html>

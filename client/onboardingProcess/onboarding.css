@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Text */
+h2 {
+    font-family: "Play", sans-serif;
+    color: #0066ff;
+    font-size: 30px;
+    margin: 0;
+}
+
+p {
+    width: 80%;
+    text-align: center;
+    font-size: 18px;
+    margin: 15px 0 20px;
+    color: #555;
+}
+
+/* Buttons */
+.btn {
+    background-color: #a855f7;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 8px;
+    width: 80%;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #FBBC04;
+    color:#333;
+}
+
+.skip {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.skip:hover {
+    text-decoration: underline;
+}
+
+.robot1 {
+    height: 500px;
+    align-items: center;
+    margin: 0;
+}
+
+.btn2{
+    margin-bottom: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn2:hover {
+    font-size: 18px;
+}
+
+.heading2 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 25px;
+    align-items: center;
+}
+
+.box-container {
+    align-self: flex-start;
+    border: 1px solid #7b7b7b;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.box{
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #333;
+    font-weight: 510;
+    border-bottom: 1px solid #7b7b7b;
+    padding: 20px 0px 30px 10px;
+}
+
+.box:hover {
+    background-color: #B45EFF;
+    color: white;
+    border-radius: 8px;
+}
+
+.box:last-child {
+    border-bottom: none;
+}

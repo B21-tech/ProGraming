@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+    <div class="left-panel">
+      <h1>Hello<br>There!</h1>
+    </div>
+    <div class="right-panel">
+      <h2>Sign Up</h2>
+
+      <form id="signupForm">
+         <label>Username </label>
+        <input type="text" id="username" placeholder="Enter username">
+
+        <label>Email </label>
+        <input type="text" id="email" placeholder="Enter email">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+
+        <button type="submit" class="login-btn">Sign up In</button>
+
+        <div class="divider">Or Continue with</div>
+
+        <button type="button" class="google-btn">
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo">
+          Continue with Google
+        </button>
+
+        <p class="signup-text">Already have an account? <a href="./index.html">Login here</a></p>
+
+        <p class="message" id="signupMessage"></p>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./src/signup.js"></script>
+</body>
+</html>

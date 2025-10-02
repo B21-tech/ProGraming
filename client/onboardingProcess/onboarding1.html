@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProGaming Welcome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Play:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./onboarding.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Lottie Animation -->
+    <div class="lottie-container">
+      <lottie-player src="../animations_and_pictues/Chatbot.json" class="robot1" background="transparent" speed="1" loop
+        autoplay>
+      </lottie-player>
+    </div>
+
+    <h2>Welcome to ProGaming!</h2>
+    <p>Let's Learn Programming like a Pro!</p>
+
+    <button class="btn" onclick="goToOnboarding2()" >Get Started!</button>
+  </div>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script>
+    function goToOnboarding2() {
+      window.location.href = "onboarding2.html";
+    }
+  </script>
+</body>
+</html>
