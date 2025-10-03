@@ -95,6 +95,11 @@
       margin-bottom: 20px;
     }
 
+    .login-btn:hover{
+      background-color: #FBBC04;
+      color: #333;
+    }
+
     .divider {
       text-align: center;
       font-size: 0.8em;
@@ -118,21 +123,7 @@
 
     .divider::after {
       right: 0;
-    }
-
-    .google-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      background: white;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+    } 
 
     .google-btn img {
       width: 20px;
