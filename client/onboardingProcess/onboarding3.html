@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+    <link rel="stylesheet" href="./onboarding.css">
+</head>
+<body>
+    <div class="container2">
+
+        <div class="head">
+            <div class="btn2" id="prevBtn">&#8592;</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+        </div>
+        <h2 class="heading2">Why do you want to learn programming?</h2>
+        <div class="box-container">
+            <div class="box">Career</div>
+            <div class="box">School</div>
+            <div class="box">Work (Imporving my skills)</div>
+            <div class="box"> Brain Training</div>
+            <div class="box">Other</div>
+        </div>
+
+        <div class="btn" id="nextBtn" style="pointer-events: none; opacity: 0.5;">Continue</div>
+    </div>
+    <script>
+        document.getElementById("prevBtn").onclick = function() {
+            window.location.href = "onboarding2.html";
+        };
+
+        // progress bar
+        const currentStep = 2;
+        const totalSteps = 3;
+        const progress = (currentStep / totalSteps) * 100;
+        document.getElementById("progressBar").style.width = progress + "%";
+
+        // next button
+        const nextBtn = document.getElementById("nextBtn");
+        const boxes = document.querySelectorAll(".box");
+        let selectedBox = false;
+
+        boxes.forEach(box => {
+            box.addEventListener("click", () => {
+                boxes.forEach(b => b.classList.remove("selected"));
+                
+                // highlight the selected box
+                box.classList.add("selected");
+
+                // enable the next button
+                nextBtn.style.backgroundColor = "#FBBC04";
+                
+                // enable continue button
+                selectedBox = true;
+                nextBtn.removeAttribute("disabled");
+                nextBtn.style.pointerEvents = "auto";
+                nextBtn.style.opacity = "1";
+            });
+        });
+        nextBtn.onclick = function(){
+            if(selectedBox){
+                window.location.href = "onboarding4.html"
+            }
+        }
+    </script>
+</body>
+</html>

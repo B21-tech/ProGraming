@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
 
 .container {
@@ -54,7 +54,7 @@ p {
 
 .btn:hover {
     background-color: #FBBC04;
-    color:#333;
+    color: #333;
 }
 
 .skip {
@@ -74,7 +74,41 @@ p {
     margin: 0;
 }
 
-.btn2{
+/* Onboarding process 2 */
+
+/* Process bar */
+.head{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.progress-container {
+    width: 100%;
+    background: #eee;
+    height: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #007BFF;
+    transition: width 0.4s ease;
+}
+
+.container2 {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn2 {
+    align-self: flex-start;
     margin-bottom: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -90,17 +124,17 @@ p {
     color: #333;
     margin-bottom: 15px;
     font-size: 25px;
-    align-items: center;
+    text-align: center;
 }
 
 .box-container {
-    align-self: flex-start;
+    width: 80%;
     border: 1px solid #7b7b7b;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.box{
+.box {
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -110,12 +144,50 @@ p {
     padding: 20px 0px 30px 10px;
 }
 
-.box:hover {
-    background-color: #B45EFF;
-    color: white;
-    border-radius: 8px;
-}
-
 .box:last-child {
     border-bottom: none;
+}
+
+.box:hover {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 6px;
+}
+
+.box.selected {
+    background-color: #007BFF;
+    color: #fff;
+    border-color: #007BFF;
+}
+
+
+#nextBtn[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===========================Picking a Language ===================== */
+.language-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.language {
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #333;
+    font-weight: 510;
+    border: 1px solid #7b7b7b;
+    padding: 20px 10px 30px 10px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.language:hover {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 6px;
 }
