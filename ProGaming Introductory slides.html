@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProGaming</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffffff;
+        overflow: hidden;
+      }
+
+      .main-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .slides-container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* cubic-bezier creates a smooth, natural feeling transition */
+      }
+
+      .slide {
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .content-wrapper {
+        max-width: 28rem;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      p {
+        color: #374151;
+        margin-bottom: 2rem;
+        font-size: 1.125rem;
+        line-height: 1.6;
+      }
+
+      .features-list {
+        text-align: left;
+        max-width: 20rem;
+        margin: 0 auto;
+        list-style: none;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .icon-container {
+        flex-shrink: 0;
+        height: 1.5rem;
+        width: 1.5rem;
+        margin-right: 0.5rem;
+      }
+
+      .icon {
+        height: 100%;
+        width: 100%;
+        stroke: currentColor;
+      }
+
+      .button {
+        padding: 0.75rem 2rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        font-size: 1.125rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .primary-button {
+        background: linear-gradient(to right, #7c3aed, #2563eb);
+        color: white;
+      }
+
+      .primary-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .secondary-button {
+        background: transparent;
+        color: #6b7280;
+      }
+
+      .secondary-button:hover {
+        background-color: #f9fafb;
+      }
+
+      .nav-controls {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .indicators {
+        position: absolute;
+        bottom: 5rem;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .indicator {
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: #dbeafe;
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+
+      .indicator.active {
+        background-color: #2563eb;
+        width: 1.5rem;
+        border-radius: 0.375rem;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        53%,
+        80%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        40%,
+        43% {
+          transform: translate3d(0, -8px, 0);
+        }
+        70% {
+          transform: translate3d(0, -4px, 0);
+        }
+      }
+
+      /* Animation utility classes */
+      .animate-fadeInUp {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .animate-fadeInLeft {
+        animation: fadeInLeft 0.8s ease-out forwards;
+      }
+
+      .animate-fadeInRight {
+        animation: fadeInRight 0.8s ease-out forwards;
+      }
+
+      .animate-pulse {
+        animation: pulse 2s infinite;
+      }
+
+      .animate-bounce {
+        animation: bounce 1.5s infinite;
+      }
+
+      /* Animation delays for staggered effects */
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
+
+      /* Initial state for slide content */
+      .slide-content {
+        opacity: 0;
+      }
+
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Slides Container -->
+      <div class="slides-container" id="slides-container">
+        <!-- Slide 1 -->
+        <div class="slide">
+          <div class="content-wrapper">
+            <h1 class="slide-content">Welcome to ProGaming!</h1>
+            <p class="slide-content delay-100">
+              ProGaming is your ultimate platform for learning how to code.
+              Track your progress, enjoy quizzes, and become the best coder at
+              your own speed.
+            </p>
+            <ul class="features-list">
+              <li class="feature-item">
+                <div class="icon-container" style="color: #8b5cf6">
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="slide-content delay-200">
+                  Real-time progress tracking
+                </p>
+              </li>
+              <li class="feature-item">
+                <div class="icon-container" style="color: #8b5cf6">
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="slide-content delay-300">Personalized Quizzes</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <div class="content-wrapper">
+            <h1 class="slide-content">Welcome to ProGaming!</h1>
+            <p class="slide-content delay-100">
+              Level up your coding with our features designed for both beginner
+              and advanced coders.
+            </p>
+            <ul class="features-list">
+              <li class="feature-item">
+                <div class="icon-container" style="color: #3b82f6">
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="slide-content delay-200">Join weekly coding tests</p>
+              </li>
+              <li class="feature-item">
+                <div class="icon-container" style="color: #3b82f6">
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="slide-content delay-300">
+                  Understand code in a fun way
+                </p>
+              </li>
+              <li class="feature-item">
+                <div class="icon-container" style="color: #3b82f6">
+                  <svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="slide-content delay-400">Win points</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <div class="content-wrapper">
+            <h1 class="slide-content">Welcome to ProGaming!</h1>
+            <p class="slide-content delay-100">
+              Ready to take your coding to the next level? Join thousands of
+              coders improving their skills with ProGaming.
+            </p>
+            <button
+              id="get-started"
+              class="button primary-button slide-content delay-200 animate-pulse"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide Indicators -->
+      <div class="indicators">
+        <div class="indicator active" data-index="0"></div>
+        <div class="indicator" data-index="1"></div>
+        <div class="indicator" data-index="2"></div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-controls">
+        <button id="skip-btn" class="button secondary-button">Skip</button>
+        <button id="next-btn" class="button primary-button">Next</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slidesContainer = document.getElementById("slides-container");
+        const slides = document.querySelectorAll(".slide");
+        const nextBtn = document.getElementById("next-btn");
+        const skipBtn = document.getElementById("skip-btn");
+        const getStartedBtn = document.getElementById("get-started");
+        const indicators = document.querySelectorAll(".indicator");
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // Initialize
+        updateButtons();
+        updateIndicators();
+        animateCurrentSlide();
+
+        // Next button click
+        nextBtn.addEventListener("click", function () {
+          if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlide();
+            updateButtons();
+            updateIndicators();
+            animateCurrentSlide();
+          }
+        });
+
+        // Skip button click
+        skipBtn.addEventListener("click", function () {
+          currentSlide = totalSlides - 1;
+          updateSlide();
+          updateButtons();
+          updateIndicators();
+          animateCurrentSlide();
+        });
+
+        // Get Started button click
+        getStartedBtn.addEventListener("click", function () {
+          // Add a bounce animation before the alert
+          getStartedBtn.classList.add("animate-bounce");
+          setTimeout(() => {
+            getStartedBtn.classList.remove("animate-bounce");
+            alert("Welcome to ProGaming! Let the games begin!");
+            // In a real app, you would redirect to the main app or signup page
+          }, 1000);
+        });
+
+        // Indicator clicks
+        indicators.forEach((indicator) => {
+          indicator.addEventListener("click", function () {
+            currentSlide = parseInt(this.getAttribute("data-index"));
+            updateSlide();
+            updateButtons();
+            updateIndicators();
+            animateCurrentSlide();
+          });
+        });
+
+        // Update slide position
+        function updateSlide() {
+          slidesContainer.style.transform = `translateX(-${
+            currentSlide * 100
+          }%)`;
+        }
+
+        // Update button visibility
+        function updateButtons() {
+          if (currentSlide === totalSlides - 1) {
+            nextBtn.style.display = "none";
+            skipBtn.style.display = "none";
+          } else {
+            nextBtn.style.display = "block";
+            skipBtn.style.display = "block";
+          }
+        }
+
+        // Update indicators
+        function updateIndicators() {
+          indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+              indicator.classList.add("active");
+            } else {
+              indicator.classList.remove("active");
+            }
+          });
+        }
+
+        // Animate current slide content
+        function animateCurrentSlide() {
+          // Reset all slide content animations
+          document.querySelectorAll(".slide-content").forEach((el) => {
+            el.style.opacity = "0";
+            el.classList.remove(
+              "animate-fadeInUp",
+              "animate-fadeInLeft",
+              "animate-fadeInRight"
+            );
+          });
+
+          // Animate current slide content
+          const currentSlideContent =
+            slides[currentSlide].querySelectorAll(".slide-content");
+          currentSlideContent.forEach((el, index) => {
+            // Add slight delay between elements
+            setTimeout(() => {
+              el.style.opacity = "1";
+
+              // Alternate animation directions for visual interest
+              if (index === 0) {
+                el.classList.add("animate-fadeInUp");
+              } else if (index % 2 === 0) {
+                el.classList.add("animate-fadeInLeft");
+              } else {
+                el.classList.add("animate-fadeInRight");
+              }
+            }, index * 150);
+          });
+        }
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slidesContainer.addEventListener(
+          "touchstart",
+          (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+          },
+          false
+        );
+
+        slidesContainer.addEventListener(
+          "touchend",
+          (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+          },
+          false
+        );
+
+        function handleSwipe() {
+          if (touchEndX < touchStartX && currentSlide < totalSlides - 1) {
+            // Swipe left
+            currentSlide++;
+          } else if (touchEndX > touchStartX && currentSlide > 0) {
+            // Swipe right
+            currentSlide--;
+          }
+
+          updateSlide();
+          updateButtons();
+          updateIndicators();
+          animateCurrentSlide();
+        }
+      });
+    </script>
+  </body>
+</html>
