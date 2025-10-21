@@ -1,6 +1,7 @@
 // API ENDPOINT
 import express from "express"
 import { completeOnboarding, isAuthenticated, login, logout, register, resendUserOtp, resetPassWord, sendVerifyOtp, verifyEmail } from "../controllers/authController.js";
+import { getDashboard } from "../controllers/dashboardController.js";
 import userAuth from "../middleware/userAuth.js";
 
 // creating a router 
@@ -16,11 +17,15 @@ authRouter.post('/send-verify-otp', userAuth, sendVerifyOtp);
 authRouter.post('/verify-account', userAuth, verifyEmail);
 authRouter.post('/is-auth', userAuth, isAuthenticated);
 
+
 // reset opt password
 authRouter.post('/resend-otp', resendUserOtp);
 authRouter.post('/reset-password', resetPassWord);
 
 // onboarding process
 authRouter.post("/onboarding", userAuth, completeOnboarding)
+
+// dashboard here
+authRouter.get("/dashboard", userAuth, getDashboard);
 
 export default authRouter;

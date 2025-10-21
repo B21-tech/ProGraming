@@ -26,44 +26,7 @@
 
         <div class="btn" id="nextBtn" style="pointer-events: none; opacity: 0.5;">Continue</div>
     </div>
-    <script>
-        document.getElementById("prevBtn").onclick = function() {
-            window.location.href = "onboarding3.html";
-        };
 
-        // progress bar
-        const currentStep = 3;
-        const totalSteps = 3;
-        const progress = (currentStep / totalSteps) * 100;
-        document.getElementById("progressBar").style.width = progress + "%";
-
-        // next button
-        const nextBtn = document.getElementById("nextBtn");
-        const boxes = document.querySelectorAll(".box");
-        let selectedBox = false;
-
-        boxes.forEach(box => {
-            box.addEventListener("click", () => {
-                boxes.forEach(b => b.classList.remove("selected"));
-                
-                // highlight the selected box
-                box.classList.add("selected");
-
-                // enable the next button
-                nextBtn.style.backgroundColor = "#FBBC04";
-                
-                // enable continue button
-                selectedBox = true;
-                nextBtn.removeAttribute("disabled");
-                nextBtn.style.pointerEvents = "auto";
-                nextBtn.style.opacity = "1";
-            });
-        });
-        nextBtn.onclick = function(){
-            if(selectedBox){
-                window.location.href = "Dashboard.html"
-            }
-        }
-    </script>
+    <script src="../src/course.js"></script>
 </body>
 </html>
