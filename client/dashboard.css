@@ -162,6 +162,7 @@ a {
   gap: 2rem;
 }
 
+/* --------- makes the page responsive -------- */
 @media (max-width: 992px) {
   .grid {
     grid-template-columns: 1fr;
@@ -169,6 +170,24 @@ a {
 
   .page {
     padding: 20px;
+  }
+}
+
+  /* Fade + slide-in animation for the entire dashboard */
+.page {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -408,6 +427,15 @@ h1 {
   color: #111827;
 }
 
+/* ----- animated streak -----*/
+.streak, .bars {
+  transition: transform 0.2s ease;
+}
+.streak:hover, .bars:hover {
+  transform: scale(1.03);
+}
+
+
 .tokens {
   display: flex;
   align-items: center;
@@ -474,6 +502,7 @@ h1 {
   overflow: hidden;
 }
 
+/* ---- animation for progress bars ---- */
 .fill {
   position: absolute;
   height: 100%;
@@ -482,8 +511,13 @@ h1 {
   background: #a78bfa;
   width: 65%;
   border-radius: 999px;
+  animation: fillLoad 1.4s ease-out forwards;
 }
 
+@keyframes fillLoad {
+  from { width: 0; }
+  to { width: var(--final-width, 70%); }
+}
 .fill.alt {
   width: 45%;
 }
@@ -498,6 +532,25 @@ h1 {
   gap: 16px;
   min-height: 150px;
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- shinny horizontal animation for the promo 'box' ---- */
+.promo::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: skewX(-25deg);
+  animation: sweep 4s linear infinite;
+}
+
+@keyframes sweep {
+  0% { left: -75%; }
+  50% { left: 125%; }
+  100% { left: 125%; }
 }
 
 .promo .bot {
@@ -644,3 +697,4 @@ h1 {
 }
 
    
+
