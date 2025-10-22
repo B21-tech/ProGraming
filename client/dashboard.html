@@ -1,140 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="dashboard.css" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
 
-<title>ProGaming Dashboard</title>
-</head>
-<body>
+    <title>ProGaming Dashboard</title>
+  </head>
   <div class="wrap">
-
-    <!-- Top Navigation -->
-    <header class="topbar">
-      <div class="brand"><div class="dot"></div><span>ProGaming</span></div>
-      <nav class="nav" aria-label="Primary">
-        <a href="#"><span>🏠</span>Dashboard</a>
-        <a href="#"><span>📚</span>Courses</a>
-        <a href="#"><span>🧭</span>Career Path</a>
-      </nav>
-      <div class="spacer"></div>
-      <div class="profile">
-        <div class="avatar">👤</div>
-        <div>
-          <b>Hi, Username</b>
-          <small>username@email.com</small>
+      <!-- Top Navigation -->
+      <header class="topbar">
+        <div class="brand">
+          <div class="dot"></div>
+          <span>ProGaming</span>
         </div>
-      </div>
-    </header>
-
-    <!-- Page -->
-    <main class="page">
-      <div class="grid">
-        <!-- LEFT -->
-        <section>
-          <h1>Good Morning, Username!</h1>
-
-          <div class="section-title">Continue Learning/Get started</div>
-
-          <article class="course-hero" aria-label="Current course: Python">
-            <div class="bot">
-              <div class="cheeks"><div class="cheek"></div><div class="cheek"></div></div>
-            </div>
-
-            <div class="hero-text">
-              <div class="pill">📘 Course</div>
-              <div class="hero-title">Python</div>
-              <div class="hero-sub">Learn the most popular language in the world</div>
-            </div>
-            <button class="btn">Resume learning</button>
-            <div class="dot-manu" title="More"><span class="dots">•••</span></div>
-          </article>
-
-          <div class="block-head">
-            <div class="section-title" style="margin:16px 0 0">Recommended for you</div>
-            <a class="link-quiet" href="#">Learn More</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="#"><span>🏠</span>Dashboard</a>
+          <a href="#"><span>📚</span>Courses</a>
+          <a href="#"><span>🧭</span>Career Path</a>
+        </nav>
+        <div class="spacer"></div>
+        <div class="profile">
+          <div class="avatar">👤</div>
+          <div>
+            <b>Hi, Username</b>
+            <small>username@email.com</small>
           </div>
+        </div>
+      </header>
 
-          <div class="cards">
-            <article class="card pink">
-              <div>
-                <div class="micro">📘 Course</div>
-                <div class="title">JavaScript</div>
+      <!-- Page -->
+      <main class="page">
+        <div class="grid">
+          <!-- LEFT -->
+          <section>
+            <h1>Good Morning, Username!</h1>
+
+            <div class="section-title">Continue Learning/Get started</div>
+
+            <article class="course-hero" aria-label="Current course: Python">
+              <div class="bot">
+                <div class="cheeks">
+                  <div class="cheek"></div>
+                  <div class="cheek"></div>
+                </div>
               </div>
-              <button class="cta">Start Language</button>
+
+              <div class="hero-text">
+                <div class="pill">📘 Course</div>
+                <div class="hero-title">Python</div>
+                <div class="hero-sub">
+                  Learn the most popular language in the world
+                </div>
+              </div>
+              <button class="btn">Resume learning</button>
+              <div class="dot-menu-container">
+                <div class="dot-menu" title="More">•••</div>
+                <div class="dropdown-content">
+                  <a href="#">Mark as completed</a>
+                  <a href="#">Add to favorites</a>
+                  <a href="#">Share course</a>
+                </div>
+              </div>
             </article>
 
-            <article class="card">
-              <div>
-                <div class="micro">📘 Course</div>
-                <div class="title">Html and CSS</div>
+            <div class="block-head">
+              <div class="section-title" style="margin: 16px 0 0">
+                Recommended for you
               </div>
-              <button class="cta">Start Language</button>
-            </article>
-
-            <article class="card">
-              <div>
-                <div class="micro">📘 Course</div>
-                <div class="title">C Sharp (C#)</div>
+              <div class="link-quiet">
+                <a href="#">Learn More</a>
+                <div class="vertical-dots-menu-container">
+                  <div class="vertical-dots" title="More options">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                  <div class="vertical-dropdown-content">
+                    <a href="#">View all recommendations</a>
+                    <a href="#">Customize recommendations</a>
+                    <a href="#">Refresh recommendations</a>
+                    <a href="#">Hide this section</a>
+                  </div>
+                </div>
               </div>
-              <button class="cta">Start Language</button>
-            </article>
-
-            <article class="card blue">
-              <div>
-                <div class="micro">🧩 Challenge</div>
-                <div class="title">Python Challenge</div>
-              </div>
-              <button class="cta blue">Start Challenge</button>
-            </article>
-          </div>
-        </section>
-
-        <!-- RIGHT -->
-        <aside class="side" aria-label="Progress and promos">
-          <section class="streak">
-            <h3>You’re on a 5-day<br/>Streak!</h3>
-            <div class="tokens">
-              <div class="coin">S</div>
-              <div class="zap"></div>
-              <div class="zap"></div>
-              <div class="zap"></div>
-              <div class="zap"></div>
-              <div class="count">⚡ 5</div>
             </div>
 
-            <div class="section-title" style="font-size:16px;margin:16px 0 6px">Top Courses of the week</div>
+            <div class="cards">
+              <article class="card pink">
+                <div>
+                  <div class="micro">📘 Course</div>
+                  <div class="title">JavaScript</div>
+                </div>
+                <button class="cta">Start Language</button>
+              </article>
 
-            <div class="bars">
-              <div class="bar">
-                <label>Python</label>
-                <div class="track"><div class="fill" style="width:72%"></div></div>
-                <small class="muted">150 pts</small>
-              </div>
-              <div class="bar">
-                <label>C#</label>
-                <div class="track"><div class="fill alt" style="width:52%"></div></div>
-                <small class="muted">100 pts</small>
-              </div>
+              <article class="card">
+                <div>
+                  <div class="micro">📘 Course</div>
+                  <div class="title">Html and CSS</div>
+                </div>
+                <button class="cta">Start Language</button>
+              </article>
+
+              <article class="card">
+                <div>
+                  <div class="micro">📘 Course</div>
+                  <div class="title">C Sharp (C#)</div>
+                </div>
+                <button class="cta">Start Language</button>
+              </article>
+
+              <article class="card blue">
+                <div>
+                  <div class="micro">🧩 Challenge</div>
+                  <div class="title">Python Challenge</div>
+                </div>
+                <button class="cta blue">Start Challenge</button>
+              </article>
             </div>
           </section>
 
-          <section class="promo">
-            <div class="bot">
-              <div class="cheeks"><div class="cheek"></div><div class="cheek"></div></div>
-            </div>
-            <div>
-              <div class="copy">Check out different career paths in IT!</div>
-              <a class="cta" href="#">View Careers</a>
-            </div>
-          </section>
-        </aside>
-      </div>
-    </main>
-  </div>
-  <!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+          <!-- RIGHT -->
+          <aside class="side" aria-label="Progress and promos">
+            <section class="streak">
+              <h3>
+                You're on a <span id="streak-count">5</span>-day<br />Streak!
+              </h3>
+              <div class="tokens">
+                <div class="coin">S</div>
+                <div class="zap"></div>
+                <div class="zap"></div>
+                <div class="zap"></div>
+                <div class="zap"></div>
+                <div class="count">⚡ <span id="streak-display">5</span></div>
+              </div>
+
+              <div
+                class="section-title"
+                style="font-size: 16px; margin: 16px 0 6px"
+              >
+                Top Courses of the week
+              </div>
+
+              <div class="bars">
+                <div class="bar">
+                  <label>Python</label>
+                  <div class="track">
+                    <div class="fill" style="width: 72%"></div>
+                  </div>
+                  <small class="muted">150 pts</small>
+                </div>
+                <div class="bar">
+                  <label>C#</label>
+                  <div class="track">
+                    <div class="fill alt" style="width: 52%"></div>
+                  </div>
+                  <small class="muted">100 pts</small>
+                </div>
+              </div>
+            </section>
+
+            <section class="promo">
+              <div class="bot">
+                <div class="cheeks">
+                  <div class="cheek"></div>
+                  <div class="cheek"></div>
+                </div>
+              </div>
+              <div>
+                <div class="copy">Check out different career paths in IT!</div>
+                <a class="cta" href="#">View Careers</a>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Course interaction functionality
+        const courseButtons = document.querySelectorAll(".cta, .btn");
+
+        courseButtons.forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.preventDefault();
+            const card = this.closest(".card, .course-hero");
+            let courseName = "";
+
+            if (card.classList.contains("course-hero")) {
+              courseName = card.querySelector(".hero-title").textContent;
+            } else {
+              courseName = card.querySelector(".title").textContent;
+            }
+
+            // Show loading state
+            const originalText = this.textContent;
+            this.textContent = "Loading...";
+            this.disabled = true;
+
+            // Simulate course loading
+            setTimeout(() => {
+              alert(`Starting ${courseName} course!`);
+              this.textContent = originalText;
+              this.disabled = false;
+
+              // Update streak if it's a new day
+              updateStreak();
+            }, 1000);
+          });
+        });
+
+        // Streak management
+        function updateStreak() {
+          const today = new Date().toDateString();
+          const lastVisit = localStorage.getItem("lastVisit");
+
+          if (lastVisit !== today) {
+            let currentStreak = parseInt(
+              localStorage.getItem("currentStreak") || "5"
+            );
+            currentStreak++;
+
+            localStorage.setItem("currentStreak", currentStreak);
+            localStorage.setItem("lastVisit", today);
+
+            // Update streak display
+            document.getElementById("streak-count").textContent = currentStreak;
+            document.getElementById("streak-display").textContent =
+              currentStreak;
+
+            // Add celebration for new streaks
+            if (currentStreak % 5 === 0) {
+              showStreakCelebration(currentStreak);
+            }
+          }
+        }
+
+        // Streak celebration
+        function showStreakCelebration(streak) {
+          const celebration = document.createElement("div");
+          celebration.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 20px rgba(0,0,0,0.3);
+          z-index: 1000;
+          text-align: center;
+        `;
+          celebration.innerHTML = `
+          <h3>🎉 Amazing! 🎉</h3>
+          <p>You've reached a ${streak}-day streak!</p>
+          <button onclick="this.parentElement.remove()" class="btn btn-primary">Continue</button>
+        `;
+          document.body.appendChild(celebration);
+        }
+
+        // Progress bar animation
+        function animateProgressBars() {
+          const progressBars = document.querySelectorAll(".fill");
+          progressBars.forEach((bar) => {
+            const width = bar.style.width;
+            bar.style.width = "0%";
+            setTimeout(() => {
+              bar.style.transition = "width 1s ease-in-out";
+              bar.style.width = width;
+            }, 100);
+          });
+        }
+
+        // Initialize progress bar animation
+        animateProgressBars();
+
+        // Navigation active state
+        const navLinks = document.querySelectorAll(".nav a");
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            navLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        // Profile dropdown simulation
+        const profile = document.querySelector(".profile");
+        profile.addEventListener("click", function () {
+          alert("Profile options would appear here");
+        });
+
+        // Course card hover effects
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-5px)";
+            this.style.transition = "transform 0.2s ease";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+          });
+        });
+
+        // Dot menu functionality
+        const dotMenu = document.querySelector(".dot-menu");
+        const dropdownContent = document.querySelector(".dropdown-content");
+
+        if (dotMenu) {
+          dotMenu.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdownContent.classList.toggle("show");
+          });
+
+          // Close dropdown when clicking elsewhere
+          document.addEventListener("click", function () {
+            dropdownContent.classList.remove("show");
+          });
+        }
+
+        // Vertical dots menu functionality
+        const verticalDots = document.querySelector(".vertical-dots");
+        const verticalDropdownContent = document.querySelector(
+          ".vertical-dropdown-content"
+        );
+
+        if (verticalDots) {
+          verticalDots.addEventListener("click", function (e) {
+            e.stopPropagation();
+            verticalDropdownContent.classList.toggle("show");
+          });
+
+          // Close dropdown when clicking elsewhere
+          document.addEventListener("click", function () {
+            verticalDropdownContent.classList.remove("show");
+          });
+        }
+
+        // Initialize with current streak
+        const currentStreak = localStorage.getItem("currentStreak") || "5";
+        document.getElementById("streak-count").textContent = currentStreak;
+        document.getElementById("streak-display").textContent = currentStreak;
+      });
+    </script>
+  </body>
 </html>
+
