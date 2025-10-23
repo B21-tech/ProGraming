@@ -10,7 +10,7 @@ const { JsonWebTokenError } = jwt;
 export const register = async (req, res) => {
     const { email, username, password } = req.body;
     if (!email || !password || !username) {
-        return res.json({ success: false, message: "Missing Details" });
+        return res.status(400).json({ success: false, message: "Missing Details" });
     }
 
     try {
@@ -21,9 +21,9 @@ export const register = async (req, res) => {
 
         if (existingUser) {
             if (existingUser.email === email)
-                return res.json({ success: false, message: "A user already exists with this email" });
+                return res.status(409).json({ success: false, message: "A user already exists with this email" });
             if (existingUser.username === username)
-                return res.json({ success: false, message: "Username already exists" });
+                return res.status(409).json({ success: false, message: "Username already exists" });
         }
 
         // Hash password
@@ -52,78 +52,79 @@ export const register = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
-        // Send OTP immediately
+        // Generate OTP
         const otp = String(Math.floor(100000 + Math.random() * 900000));
         user.verifyOtp = otp;
         user.verifyOtpExpire = Date.now() + 24 * 60 * 60 * 1000;
         await user.save();
 
+        // Send email
         const mailOption = {
-            from: "ProGaming " + process.env.SENDER_EMAIL,
+            from: '"ProGaming Support" <no.reply.progaming@gmail.com>',
             to: user.email,
             subject: 'Verify Your ProGaming Account',
             text: `Welcome ${username}! Your verification OTP is: ${otp}`
         };
         await transporter.sendMail(mailOption);
 
-        return res.json({
+        // ✅ Send proper success response
+        return res.status(200).json({
             success: true,
             message: "Signup successful! OTP has been sent to your email.",
             onboardingRequired: true
         });
 
     } catch (error) {
-        return res.json({ success: false, message: error.message });
+        console.error("Signup error:", error);
+        return res.status(500).json({ success: false, message: "Signup failed. " + error.message });
     }
 };
 
 
 // User login validation 
 export const login = async (req, res) => {
+  try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.json({ success: false, message: "Email and password are required" })
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ success: false, message: "Invalid email or password" });
     }
 
-    try {
-        const user = await userModel.findOne({ email });
-
-        if (!user) {
-            return res.json({ success: false, message: "Invalid email or password" })
-        }
-        // password varification
-        const isMatch = await bcrypt.compare(password, user.password);
-
-        // if  password does not match
-        if (!isMatch) {
-            return res.json({ sucess: false, message: "Invalid email or password" });
-        }
-
-        // generating tokens and ids for cookies 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV == 'production' ?
-                'none' : 'strict',
-            // expiry time for the cookie
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
-
-        // check if onboarding is complete
-        if (!user.OnboardingComplete) {
-            return res.json({ success: true, onboardingRequired: true });
-        }
-
-        // if onboarding is already done
-        return res.json({ success: true });
-
-    } catch (error) {
-        return res.json({ success: false, message: error.message });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: "Invalid email or password" });
     }
-}
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    const userCourseId = user.selectedLanguage; 
+
+    // ✅ Send OnboardingComplete field
+    return res.status(200).json({
+      success: true,
+      token,
+      user: {
+        username: user.username,
+        OnboardingComplete: user.OnboardingComplete,
+        selectedLanguage: user.selectedLanguage,
+        selectedCourseId: userCourseId,
+      }
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 
 // Code for user to verify their account 
 export const sendVerifyOtp = async (req, res) => {
@@ -149,7 +150,7 @@ export const sendVerifyOtp = async (req, res) => {
         // saving the property value 
         await user.save();
         const mailOption = {
-            from: "ProGaming" + process.env.SENDER_EMAIL,
+            from: '"ProGaming Support" <no.reply.progaming@gmail.com>',
             to: user.email,
             subject: 'Account Verification OTP',
             text: 'Your OTP is ' + otp + '. Please verify your account using this OTP. Do not share with anyone else.'
@@ -252,7 +253,7 @@ export const resendUserOtp = async (req, res) => {
         // saving the property value 
         await user.save();
         const mailOption = {
-            from: "ProGaming" + process.env.SENDER_EMAIL,
+            from: '"ProGaming Support" <no.reply.progaming@gmail.com>',
             to: user.email,
             subject: 'Password Reset OTP',
             text: 'Your resetted OTP is ' + otp + '. Please use this OTP to change your password. Do not share with anyone else.'
@@ -319,12 +320,23 @@ export const completeOnboarding = async (req, res) => {
             return res.status(400).json({ success: false, message: "Language must be selected" });
         }
 
-        //update user document
-        const updateUser = await userModel.findByIdAndUpdate(
+        // Fetch user from DB
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        // Prevent repeating onboarding
+        if (user.OnboardingComplete) {
+            return res.status(400).json({ success: false, message: "Onboarding already completed" });
+        }
+
+        // Update user document
+        const updatedUser = await userModel.findByIdAndUpdate(
             userId,
             {
                 selectedLanguage,
-                OnboardingComplete: true,
+                OnboardingComplete: true, // ✅ correct casing
                 progress: { [selectedLanguage]: { level: 1, completed: [] } }
             },
             { new: true }
@@ -333,10 +345,11 @@ export const completeOnboarding = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Onboarding completed",
-            user: updateUser
+            user: updatedUser
         });
     }
     catch (error) {
         return res.status(500).json({ success: false, message: error.message });
     }
-}
+};
+
