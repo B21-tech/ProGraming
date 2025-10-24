@@ -51,7 +51,7 @@ nextBtn.onclick = async function() {
 
     if (data.success) {
       // ✅ Redirect only after saving to DB
-      window.location.href = "../Dashboard.html";
+      window.location.href = "../dashboardFolder/dashboard.html";
     } else {
       alert(data.message || "Something went wrong");
     }

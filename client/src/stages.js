@@ -11,13 +11,14 @@ async function loadStages() {
   try {
     console.log("Requesting stages for:", selectedLanguage, "user:", userId);
 
-    const res = await fetch(`${API_URL}course/${selectedLanguage}?userId=${userId}`, {
+    const res = await fetch(`${API_URL}course/${encodeURIComponent(selectedLanguage)}?userId=${userId}`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     });
+
 
     const data = await res.json();
     console.log("fetch /api/stages response:", data);

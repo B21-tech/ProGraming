@@ -49,3 +49,41 @@ body {
   background-color: #a0c5ff;
   cursor: not-allowed;
 }
+
+.option-btn {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option-btn:hover {
+  background: #f2f2f2;
+}
+
+.correct {
+  background-color: #c8f7c5;
+  border-color: #4caf50;
+}
+
+.wrong {
+  background-color: #f8d7da;
+  border-color: #f44336;
+}
+
+.explanation {
+  margin-top: 10px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-left: 4px solid #2196f3;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+

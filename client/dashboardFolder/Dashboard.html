@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./Dashboard.css">
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Top Navigation -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div><span>ProGaming</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="./Dashboard.html"><span>🏠</span>Dashboard</a>
+        <a href="#"><span>📚</span>Courses</a>
+        <a href="./career.html"><span>🧭</span>Career Path</a>
+      </nav>
+      <div class="spacer"></div>
+
+      <div class="profile-menu">
+        <button class="avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false">
+          👤
+          <span class="avatar-name" id="userName">Hi, Username</span>
+          <small id="userEmail">username@email.com</small>
+        </button>
+
+        <div class="menu" id="userMenu" role="menu">
+          <button class="menu-item" id="deleteCourseBtn" role="menuitem"> Delete a course</button>
+          <div class="menu-sep"></div>
+          <label class="menu-item theme-toggle" role="menuitem">
+            <input type="checkbox" id="themeSwitch" />
+            <span>🌗 Dark/Light mode</span>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page -->
+    <main class="page">
+      <div class="grid">
+        <!-- LEFT -->
+        <section>
+          <h1 id="greeting" class="greeting">Good Morning, Username!</h1>
+
+          <article class="course-hero" aria-label="Current course: Python">
+            <div class="bot">
+              <div class="cheeks">
+                <div class="cheek"></div>
+                <div class="cheek"></div>
+              </div>
+            </div>
+
+            <div class="hero-text">
+              <div class="pill">📘 Course</div>
+              <div class="hero-title" id="userCourse">Python</div>
+              <div class="hero-sub">Learn the most popular language in the world</div>
+            </div>
+            <button class="btn" onclick="window.location.href='../mainProcess/stages.html'">Resume learning</button>
+            <div class="dot-manu" title="More"><span class="dots">•••</span></div>
+          </article>
+
+          <div class="block-head">
+            <div class="section-title" style="margin:16px 0 0">Recommended for you</div>
+            <a class="link-quiet" href="#">Learn More</a>
+          </div>
+
+          <div class="cards">
+            <article class="card pink">
+              <div>
+                <div class="micro">📘 Course</div>
+                <div class="title">JavaScript</div>
+              </div>
+              <button class="cta">Start Language</button>
+            </article>
+
+            <article class="card">
+              <div>
+                <div class="micro">📘 Course</div>
+                <div class="title"> C# </div>
+              </div>
+              <button class="cta">Start Language</button>
+            </article>
+
+            <article class="card blue">
+              <div>
+                <div class="micro">📘 Course</div>
+                <div class="title">Python</div>
+              </div>
+              <button class="cta blue">Start Language</button>
+            </article>
+          </div>
+        </section>
+
+        <!-- RIGHT -->
+        <aside class="side" aria-label="Progress and promos">
+          <section class="streak">
+            <h3 id="streak">🔥 Streak: 0</h3>
+            <div class="tokens">
+              <div class="coin">S</div>
+              <div class="zap"></div>
+              <div class="zap"></div>
+              <div class="zap"></div>
+              <div class="zap"></div>
+              <div class="count" id="xpPoints">💎 XP: 0</div>
+            </div>
+
+            <div class="section-title-right" style="font-size:16px;margin:16px 0 6px">Top Courses of the week</div>
+
+            <div class="bars">
+              <div class="bar">
+                <label></label>
+                <div class="track">
+                  <div class="fill" style="width:72%"></div>
+                </div>
+                <small class="muted"></small>
+              </div>
+            </div>
+          </section>
+
+          <section class="promo">
+            <div class="bot">
+              <div class="cheeks">
+                <div class="cheek"></div>
+                <div class="cheek"></div>
+              </div>
+            </div>
+            <div>
+              <div class="copy">Check out different career paths in IT!</div>
+              <a class="cta" href="#">View Careers</a>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    async function loadDashboard() {
+      try {
+        const res = await fetch("http://localhost:4000/api/dashboard", {
+          method: "GET",
+          credentials: "include", // 👈 important
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          console.log("✅ Dashboard data:", data);
+
+          // display email
+          const emailContainer = document.getElementById("userEmail");
+          const storedEmail = localStorage.getItem("email");
+          if (emailContainer && storedEmail) {
+            emailContainer.innerText = storedEmail;
+          }
+
+          // Greeting
+          document.getElementById("greeting").innerText = data.greeting || "Hello!";
+
+          // username 
+          const userContainer = document.getElementById("userName");
+          const username = localStorage.getItem("username");
+          if (userContainer && username) {
+            userContainer.innerText = username;
+          }
+
+          // course Display
+          const courseContainer = document.getElementById("userCourse");
+          const selectedLanguage = localStorage.getItem("selectedLanguage");
+          if (courseContainer && selectedLanguage) {
+            courseContainer.innerText = selectedLanguage;
+          }
+
+          // XP points
+          const xpContainer = document.getElementById("xpPoints");
+          if (xpContainer) xpContainer.innerText = `💎 XP: ${data.totalXP}`;
+
+          // Streak
+          const streakContainer = document.getElementById("streak");
+          if (streakContainer) streakContainer.innerText = `🔥 Streak: ${data.streak}`;
+
+          // PROGRESS BAR UPDATE SECTION
+          const barsContainer = document.querySelector(".bars");
+          if (barsContainer) {
+            barsContainer.innerHTML = "";
+            const MAX_XP = 500; // adjust dynamically if needed
+
+            data.topCourses.forEach((course) => {
+              const percentage = Math.min((course.xp / MAX_XP) * 100, 100).toFixed(1);
+              const barHTML = `
+          <div class="bar">
+            <label>${course.name}</label>
+            <div class="track">
+              <div class="fill" style="width:${percentage}%"></div>
+            </div>
+            <small class="muted">${course.xp} pts</small>
+          </div>
+        `;
+              barsContainer.insertAdjacentHTML("beforeend", barHTML);
+            });
+          }
+
+          // Render courses
+          const cardsContainer = document.querySelector(".cards");
+          if (cardsContainer) {
+            cardsContainer.innerHTML = "";
+
+            // Recommended courses
+            data.recommendedCourses.forEach((course, index) => {
+              const colors = ["", "blue", ""];
+              const cardHTML = `
+          <article class="card ${colors[index] || ""}">
+            <div>
+              <div class="micro">📘 Course</div>
+              <div class="title">${course}</div>
+            </div>
+            <button class="cta" onclick="registerCourse('${course}')">Start Language</button>
+          </article>
+        `;
+              cardsContainer.insertAdjacentHTML("beforeend", cardHTML);
+            });
+          }
+
+
+
+        } else {
+          alert("❌ " + data.message);
+        }
+      } catch (err) {
+        console.error("Error connecting to dashboard:", err);
+        alert("Error connecting to dashboard");
+      }
+    }
+
+    // register for a course:
+    async function registerCourse(courseName) {
+      try {
+        const userId = localStorage.getItem("userId"); // make sure you store it on login
+        const res = await fetch("http://localhost:4000/api/progress/registerCourse", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId, courseName }),
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert(`✅ Registered for ${courseName}`);
+          localStorage.setItem("selectedLanguage", courseName); // update active course
+          loadDashboard(); // reload dashboard dynamically
+        } else {
+          alert("❌ " + data.message);
+        }
+      } catch (err) {
+        console.error("Error registering course:", err);
+        alert("Error registering course");
+      }
+    }
+
+    loadDashboard();
+
+
+  </script>
+  <script src="./dashboard.js"></script>
+
+
+</body>
+
+</html>

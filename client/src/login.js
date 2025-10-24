@@ -15,7 +15,6 @@ form.addEventListener("submit", async (e) => {
       credentials: "include"
     });
 
-    // defensive: ensure valid JSON
     const text = await res.text();
     let data;
     try {
@@ -35,6 +34,9 @@ form.addEventListener("submit", async (e) => {
     }
 
     if (data.success) {
+      // 🧹 Clear old session data before storing new
+      localStorage.clear();
+
       // store token
       if (data.token) localStorage.setItem("token", data.token);
 
@@ -44,22 +46,33 @@ form.addEventListener("submit", async (e) => {
         localStorage.setItem("userId", decoded.id);
       }
 
-      // store selectedLanguage
+      // store selectedLanguage (if available)
       const user = data.user || {};
       if (user.selectedLanguage) {
         localStorage.setItem("selectedLanguage", user.selectedLanguage);
       }
 
-      console.log("Stored userId:", localStorage.getItem("userId"));
-      console.log("Stored selectedLanguage:", localStorage.getItem("selectedLanguage"));
+      // store email
+      if (user.email) {
+        localStorage.setItem("email", user.email);
+      }
 
-      messageBox.innerText = "✅ Login Successfull, Redirecting...";
+      // store username
+      if (user.username) {
+        localStorage.setItem("username", user.username);
+      }
+
+      console.log("✅ Stored userId:", localStorage.getItem("userId"));
+      console.log("✅ Stored selectedLanguage:", localStorage.getItem("selectedLanguage"));
+      console.log("✅ Stored email:", localStorage.getItem("email"));
+
+      messageBox.innerText = "✅ Login Successful, Redirecting...";
 
       // redirect after login
       const onboardingFlag = user.onboardingComplete ?? user.OnboardingComplete ?? false;
       setTimeout(() => {
         if (onboardingFlag) {
-          window.location.href = "./Dashboard.html";
+          window.location.href = "../dashboardFolder/dashboard.html";
         } else {
           window.location.href = "./onboardingProcess/onboarding1.html";
         }
