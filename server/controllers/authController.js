@@ -113,6 +113,7 @@ export const login = async (req, res) => {
       token,
       user: {
         username: user.username,
+        email: user.email,
         OnboardingComplete: user.OnboardingComplete,
         selectedLanguage: user.selectedLanguage,
         selectedCourseId: userCourseId,

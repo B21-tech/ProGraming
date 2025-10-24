@@ -32,81 +32,109 @@ export const InitializeProgress = async (req, res) => {
 };
 
 // update progress when user completes a stage
-export const completedStage = async (req, res) => {
+export const completeStage = async (req, res) => {
   try {
-    const userId = req.user?.id || req.body.userId;
-    const { stageId } = req.body;
+    const { userId, stageId } = req.params;
+    const { score, total } = req.body;
 
-    // Fetch user
     const user = await userModel.findById(userId);
-    if (!user) return res.status(404).json({ error: "User not found" });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
-    const course = user.selectedLanguage;
-    if (!course) return res.status(400).json({ error: "No course selected" });
+    const stage = await Stage.findById(stageId).populate("level");
+    if (!stage) return res.status(404).json({ success: false, message: "Stage not found" });
 
-    // Initialize progress for course if missing
-    if (!user.progress.has(course)) {
-      user.progress.set(course, {
-        currentLevel: null,
-        currentStage: null,
+    const lang = user.selectedLanguage;
+    let progress = user.progress.get(lang);
+
+    if (!progress) {
+      progress = {
+        currentLevel: 1,
+        currentStage: stageId,
         completedStages: [],
         totalXP: 0,
-        lastActivity: new Date(),
-      });
+        streak: 0,
+        lastStreakDate: null,
+      };
     }
 
-    const progress = user.progress.get(course);
+    const percentage = (score / total) * 100;
+    const passingScore = 60; // Minimum % to unlock next stage
 
-    // Fetch the completed stage
-    const stage = await Stage.findById(stageId).populate("level");
-    if (!stage) return res.status(404).json({ error: "Stage not found" });
+    // --------------------------
+    // Determine XP for the attempt
+    // --------------------------
+    const alreadyCompleted = progress.completedStages.includes(stageId);
+    const gainedXP = alreadyCompleted ? 5 : 50;
 
-    // Mark stage complete
-    if (!progress.completedStages.includes(stage._id.toString())) {
-      progress.completedStages.push(stage._id.toString());
-      progress.totalXP += 50; // add XP
-      progress.lastActivity = new Date();
-    }
+    // Update streak
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let lastDate = progress.lastStreakDate ? new Date(progress.lastStreakDate) : null;
+    if (lastDate) lastDate.setHours(0, 0, 0, 0);
 
-    // Fetch all stages in this level
-    const stagesInLevel = await Stage.find({ level: stage.level._id }).sort({ order: 1 });
-
-    // Check if all stages in level are completed
-    const completedInLevel = stagesInLevel.filter(s => progress.completedStages.includes(s._id.toString()));
-
-    if (completedInLevel.length === stagesInLevel.length) {
-      // All stages completed → move to next level
-      const nextLevel = await Level.findOne({
-        course: stage.level.course,
-        order: stage.level.order + 1
-      });
-
-      progress.currentLevel = nextLevel ? nextLevel._id : stage.level._id;
-
-      // Set next stage as first stage of next level (or null if last level)
-      const nextStage = nextLevel
-        ? await Stage.findOne({ level: nextLevel._id }).sort({ order: 1 })
-        : null;
-
-      progress.currentStage = nextStage ? nextStage._id : null;
+    if (!lastDate) {
+      progress.streak = 1;
     } else {
-      // Still in same level → next uncompleted stage
-      const nextStage = stagesInLevel.find(s => !progress.completedStages.includes(s._id.toString()));
-      progress.currentStage = nextStage ? nextStage._id : null;
-      progress.currentLevel = stage.level._id;
+      const diffDays = (today - lastDate) / (1000 * 60 * 60 * 24);
+      if (diffDays === 1) {
+        progress.streak += 1;
+      } else if (diffDays > 1) {
+        progress.streak = 1;
+      }
+    }
+    progress.lastStreakDate = new Date();
+
+    // If user passed the stage
+    if (percentage >= passingScore) {
+      if (!alreadyCompleted) progress.completedStages.push(stageId);
+      progress.totalXP += gainedXP;
+
+      // --------------------------
+      // Unlock next stage
+      // --------------------------
+      const levelStages = stage.level.stages;
+      const currentIndex = levelStages.indexOf(stageId);
+
+      if (currentIndex < levelStages.length - 1) {
+        const nextStageId = levelStages[currentIndex + 1];
+        if (!progress.completedStages.includes(nextStageId)) progress.currentStage = nextStageId;
+      } else {
+        const nextLevel = await Level.findOne({
+          course: stage.level.course,
+          order: stage.level.order + 1,
+        }).populate("stages");
+
+        if (nextLevel && nextLevel.stages.length > 0) {
+          const nextStageId = nextLevel.stages[0]._id;
+          if (!progress.completedStages.includes(nextStageId)) {
+            progress.currentStage = nextStageId;
+            progress.currentLevel = nextLevel.order;
+          }
+        } else {
+          progress.currentStage = progress.currentStage || stageId;
+        }
+      }
+    } else if (alreadyCompleted) {
+      progress.totalXP += 5; // replay XP
     }
 
     // Save progress
-    user.progress.set(course, progress);
+    user.progress.set(lang, progress);
     await user.save();
 
-    res.json({ message: "Stage completed!", progress });
+    res.json({
+      success: true,
+      message: alreadyCompleted
+        ? "Stage replayed! XP added."
+        : "Stage completed and next unlocked!",
+      progress,
+      unlocked: percentage >= passingScore,
+    });
   } catch (err) {
-    console.error("Error updating progress:", err);
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
-
 
 
 // get user progress for a specific language
@@ -172,6 +200,63 @@ export const getStagesByCourse = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+
+
+
+///// NEWWWWWWW //////
+// Allow the uset to register for a new course:
+export const registerCourse = async (req, res) => {
+  try {
+    const { userId, courseName } = req.body;
+
+    // Validate inputs
+    if (!userId || !courseName) {
+      return res.status(400).json({ success: false, message: "Missing userId or courseName" });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Check if course already registered
+    if (user.progress.has(courseName)) {
+      return res.status(400).json({ success: false, message: "Already registered for this course" });
+    }
+
+    // Initialize new course progress
+    const newProgress = {
+      currentLevel: 1,
+      currentStage: null,
+      completedStages: [],
+      totalXP: 0,
+      lastActivity: new Date(),
+      streak: 0,
+      lastStreakDate: null
+    };
+
+    // Add to user's progress map
+    user.progress.set(courseName, newProgress);
+
+    // Make this the current active course
+    user.selectedLanguage = courseName;
+
+    // Save user
+    await user.save();
+
+    return res.status(201).json({
+      success: true,
+      message: `Successfully registered for ${courseName}!`,
+      progress: newProgress,
+      activeCourse: courseName
+    });
+
+  } catch (err) {
+    console.error("Error registering course:", err);
+    return res.status(500).json({ success: false, message: "Server error while registering course" });
   }
 };
 

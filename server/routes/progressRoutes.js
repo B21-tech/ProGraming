@@ -1,5 +1,5 @@
 import express from 'express';
-import { completedStage, getUserProgress, InitializeProgress } from "../controllers/progressController.js";
+import { completeStage, getUserProgress, InitializeProgress, registerCourse } from "../controllers/progressController.js";
 import userAuth from '../middleware/userAuth.js';
 
 import userModel from '../models/userModel.js';
@@ -8,7 +8,7 @@ import Course from '../models/Course.js';
 const router = express.Router();
 
 router.post("/intialize", userAuth, InitializeProgress);
-router.post("/completed-stage", userAuth, completedStage);
+router.post("/complete/:userId/:stageId", userAuth, completeStage);
 router.get("/:userId", userAuth, getUserProgress);
 
 // GET /api/progress/:userId/full
@@ -41,5 +41,9 @@ router.get("/:userId/full", userAuth, async (req, res) => {
   }
 });
 
+
+
+/////// NEWWWWW /////
+router.post("/registerCourse", userAuth, registerCourse);
 
 export default router;

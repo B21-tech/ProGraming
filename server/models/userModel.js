@@ -30,6 +30,8 @@ const userSchema = new mongoose.Schema({
             completedStages: [String],
             totalXP: {type: Number, default: 0},
             lastActivity: {type: Date, default: Date.now},
+            streak: {type: Number, default: 0},
+            lastStreakDate: {type: Date, default: null}
         }, { _id: false }),
         default: {}
     }
