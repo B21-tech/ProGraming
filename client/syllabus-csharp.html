@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="stylesheet" href="syllabus.css"/>
+<title>ProGaming – C# Syllabus</title>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="courses.html">📚 Courses</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn" href="courses.html">Back to Courses</a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h1>C# — What you’ll learn</h1>
+      <p class="muted">Build enterprise apps, APIs and games with modern C# and .NET fundamentals.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Beginner</span>
+      <div class="level">
+        <div class="topic"><b>Variables &amp; Data Types</b><span>Numeric types, strings, booleans; declarations and casting basics.</span></div>
+        <div class="topic"><b>Operators</b><span>Arithmetic, comparison, logical and null-coalescing operators.</span></div>
+        <div class="topic"><b>Conditionals</b><span><code>if/else</code>, <code>switch</code> and pattern matching fundamentals.</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="badge">Intermediate</span>
+      <div class="level">
+        <div class="topic"><b>Loops</b><span><code>for</code>, <code>while</code>, <code>foreach</code> and iteration best practices.</span></div>
+        <div class="topic"><b>Methods</b><span>Parameters, return types, overloading and access modifiers.</span></div>
+        <div class="topic"><b>Arrays &amp; Lists</b><span>Collections, indexing, LINQ introduction and common operations.</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="badge">Advanced</span>
+      <div class="level">
+        <div class="topic"><b>Objects &amp; Classes</b><span>Classes, properties, constructors, encapsulation.</span></div>
+        <div class="topic"><b>Inheritance</b><span>Base/derived classes, interfaces and polymorphism.</span></div>
+        <div class="topic"><b>Async Programming</b><span><code>async/await</code>, tasks and handling asynchronous workflows.</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#">Start C# Track</a>
+        <a class="btn" href="courses.html">Choose another course</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const saved = localStorage.getItem('theme')||'light';
+    document.documentElement.setAttribute('data-theme', saved);
+  </script>
+</body>
+</html>
