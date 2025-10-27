@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ProGaming — Quiz</title>
+
+<style>
+/* colors i'm using */
+:root{
+  --blue:#0a66ff;
+  --ink:#0b1a33;
+  --white:#fff;
+  --card:#f5f7fa;
+  --border:#e0e6ef;
+  --green:#19a874;
+  --red:#ef4444;
+}
+
+/* page basics */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:var(--white);
+  color:var(--ink);
+}
+
+/* top bar */
+header{
+  display:flex;align-items:center;gap:10px;
+  padding:18px 20px;
+  border-bottom:2px solid var(--blue);
+  font-weight:800;font-size:22px;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+.logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--blue),#0a4fe0)}
+
+/* card */
+.quiz-card{
+  max-width:760px;margin:36px auto;padding:24px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+/* question text */
+h2{margin:10px 0 6px;font-size:24px}
+
+/* choices */
+.option{
+  width:100%;
+  text-align:left;
+  background:var(--white);
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  margin-top:12px;
+  cursor:pointer;
+  font-size:16px;
+  transition:border-color .15s ease, transform .02s ease;
+}
+.option:hover{border-color:var(--blue)}
+.option:active{transform:translateY(1px)}
+
+/* feedback */
+.feedback{margin-top:14px;font-weight:700}
+
+/* footer buttons */
+.buttons{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.btn{
+  border:none;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;transition:opacity .15s ease
+}
+.btn:hover{opacity:.9}
+#nextBtn{background:var(--blue);color:#fff}
+#skipBtn{background:#fff;border:2px solid var(--blue);color:var(--blue)}
+
+/* result */
+.result{text-align:center;padding:28px}
+.score{font-size:28px;font-weight:900;color:var(--blue)}
+</style>
+</head>
+<body>
+
+<!-- top title -->
+<header>
+  <div class="logo"></div>
+  ProGaming — Quiz
+</header>
+
+<!-- quiz area -->
+<section id="play" class="quiz-card">
+  <p><strong>Question <span id="qNumber">1</span> of <span id="totalQ">5</span></strong></p>
+  <h2 id="question">Loading…</h2>
+  <div id="options"></div>
+  <div id="feedback" class="feedback"></div>
+  <div class="buttons">
+    <button id="skipBtn" class="btn">Skip</button>
+    <button id="nextBtn" class="btn">Next</button>
+  </div>
+</section>
+
+<!-- end screen -->
+<section id="done" class="quiz-card result" style="display:none;">
+  <h2>Quiz complete</h2>
+  <p id="finalScore" class="score"></p>
+  <button id="restartBtn" class="btn" style="border:2px solid var(--blue);background:#fff;color:var(--blue)">Try again</button>
+</section>
+
+<script>
+// questions 
+const quiz = [
+  { q: "Which of the following is a valid variable name in Python?",
+    options: ["2value","my-variable","_value","my variable"], answer: 2 },
+  { q: "What is the correct way to assign a value to a variable?",
+    options: ["x == 5","x = 5","int x = 5","5 = x"], answer: 1 },
+  { q: "What is the data type of x = 3.14?",
+    options: ["int","float","str","bool"], answer: 1 },
+  { q: "What will type('10') return?",
+    options: ["int","float","str","bool"], answer: 2 },
+  { q: "Which of the following is mutable in Python?",
+    options: ["Tuple","String","List","Integer"], answer: 2 }
+];
+
+// quick refs so i don't keep querying
+const play = document.getElementById('play');
+const done = document.getElementById('done');
+const questionEl = document.getElementById('question');
+const optionsEl  = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const qNumberEl  = document.getElementById('qNumber');
+const totalQEl   = document.getElementById('totalQ');
+const nextBtn    = document.getElementById('nextBtn');
+const skipBtn    = document.getElementById('skipBtn');
+const finalScore = document.getElementById('finalScore');
+const restartBtn = document.getElementById('restartBtn');
+
+let i = 0;          // current question index
+let score = 0;      // how many correct
+let locked = false; // stop multiple clicks
+
+// total count on page
+totalQEl.textContent = quiz.length;
+
+// show a question on screen
+function render(){
+  // reset stuff for new question
+  feedbackEl.textContent = '';
+  optionsEl.innerHTML = '';
+  locked = false;
+
+  // update text
+  const item = quiz[i];
+  qNumberEl.textContent = i + 1;
+  questionEl.textContent = item.q;
+
+  // build the 4 options as buttons (A/B/C/D)
+  item.options.forEach((txt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.type = 'button';
+    btn.textContent = String.fromCharCode(65 + idx) + ') ' + txt;
+    btn.onclick = () => pick(idx); // when i click an option
+    optionsEl.appendChild(btn);
+  });
+}
+
+// when user picks an option
+function pick(idx){
+  if (locked) return;   // already answered
+  locked = true;
+
+  const correct = quiz[i].answer;
+  const nodes = [...document.querySelectorAll('.option')];
+
+  // color the borders to show what's what
+  nodes.forEach((n, k) => {
+    n.style.pointerEvents = 'none';
+    if (k === correct) n.style.borderColor = 'var(--green)';
+    if (k === idx && idx !== correct) n.style.borderColor = 'var(--red)';
+  });
+
+  // message + score update
+  if (idx === correct){
+    feedbackEl.textContent = "Nice! That's correct.";
+    feedbackEl.style.color = 'var(--green)';
+    score++;
+  }else{
+    feedbackEl.textContent = "Correct: " + quiz[i].options[correct];
+    feedbackEl.style.color = 'var(--red)';
+  }
+}
+
+// go next
+nextBtn.onclick = () => {
+  if (i < quiz.length - 1){
+    i++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+// skip (no penalty, just moves on)
+skipBtn.onclick = () => {
+  if (i < quiz.length - 1){
+    i++;
+    render();
+  }else{
+    finish();
+  }
+};
+
+// show final screen
+function finish(){
+  play.style.display = 'none';
+  done.style.display = 'block';
+  finalScore.textContent = `You got ${score} out of ${quiz.length}`;
+}
+
+// try again (reset everything)
+restartBtn.onclick = () => {
+  i = 0;
+  score = 0;
+  play.style.display = 'block';
+  done.style.display = 'none';
+  render();
+};
+
+// start it up
+render();
+</script>
+</body>
+</html>
