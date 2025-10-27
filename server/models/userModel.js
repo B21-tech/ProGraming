@@ -3,27 +3,39 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     // adding properties for the table
-    username: {type: String, required: true, unique: true}, // username and email are unique
-    email: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
+    username: { type: String, required: true, unique: true }, // username and email are unique
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     // verify user
-    verifyOtp: {type: String, default: ""},
+    verifyOtp: { type: String, default: "" },
     //expiry time for verification 
-    verifyOtpExpire: {type: Number, default: 0},
+    verifyOtpExpire: { type: Number, default: 0 },
     // property to define if user is verified
-    isAccountVerified: {type: Boolean, default: false},// unverified by default
-    
+    isAccountVerified: { type: Boolean, default: false },// unverified by default
+
     // password reset otp and expiry time
-    resetOtp: {type: String, default: ''},
-    resetOtpExpire: {type: Number, default: 0},
+    resetOtp: { type: String, default: '' },
+    resetOtpExpire: { type: Number, default: 0 },
 
     // onboarding process
-    OnboardingComplete: {type: Boolean, default: false},
-    selectedLanguage: {type: String, default: null},
-
+    OnboardingComplete: { type: Boolean, default: false },
+    selectedLanguage: { type: String, default: null },
+    
     // Process
-    progress: {type: Map, of: Object, default:{}},
-}, {timestamps: true});
+    progress: {
+        type: Map,
+        of: new mongoose.Schema({
+            currentLevel: {type: Number, default: 1},
+            currentStage: {type: String, default: null},
+            completedStages: [String],
+            totalXP: {type: Number, default: 0},
+            lastActivity: {type: Date, default: Date.now},
+            streak: {type: Number, default: 0},
+            lastStreakDate: {type: Date, default: null}
+        }, { _id: false }),
+        default: {}
+    }
+}, { timestamps: true });
 
 // creating user model 
 const userModel = mongoose.models.User || mongoose.model('User', userSchema);

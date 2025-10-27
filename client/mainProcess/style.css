@@ -1,0 +1,67 @@
+.container {
+  width: 80%;
+  margin: 50px auto;
+  font-family: Arial, sans-serif;
+}
+
+#stageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stage {
+  padding: 15px;
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  background-color: #e8f5e9;
+}
+
+.stage.locked {
+  border-color: #ccc;
+  background-color: #f0f0f0;
+  color: #999;
+}
+
+.stage h2 {
+  margin: 0 0 10px 0;
+}
+
+.levelContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.level {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.level:hover {
+  background: #f0f0f0;
+}
+
+.level.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.stage-name {
+  font-weight: bold;
+}
+
+.lock-icon {
+  font-size: 18px;
+  color: red;
+}
+
+

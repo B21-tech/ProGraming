@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ProGaming – Career Paths</title>
+<link rel="stylesheet" href="career.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="brand"><div class="dot"></div><span>ProGaming</span></div>
+      <nav class="nav" aria-label="Primary">
+        <a href="./Dashboard.html">🏠 Dashboard</a>
+        <a href="./career.html">🧭 Career Path</a>
+        <a href="#">📚 Courses</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn ghost" href="./Dashboard.html">Back to Dashboard</a>
+    </header>
+
+    <!-- Page -->
+    <main class="page">
+      <section class="hero">
+        <div>
+          <h1>Your Path into Tech</h1>
+          <p>Explore roles, benefits, salary ranges, and exactly how to learn them—guided by ProGaming.</p>
+        </div>
+      </section>
+
+      <div class="grid">
+        <!-- LEFT: Roles & Salaries -->
+        <section class="card">
+          <h2>High-Demand Careers in Tech</h2>
+          <div class="chips">
+            <div class="chip">Beginner friendly</div>
+            <div class="chip">Great growth</div>
+            <div class="chip">Remote-possible</div>
+          </div>
+
+          <table aria-label="Career salary ranges">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>What you do</th>
+                <th>Typical salary (SA)</th>
+                <th>Typical salary (Global)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Front-End Developer</strong></td>
+                <td>Build responsive websites & UIs (HTML, CSS, JS).</td>
+                <td>R250k–R650k/yr</td>
+                <td>$60k–$130k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Back-End Developer</strong></td>
+                <td>APIs, databases, servers (Node/Java/C#).</td>
+                <td>R300k–R800k/yr</td>
+                <td>$70k–$150k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Full-Stack Developer</strong></td>
+                <td>Front + back; ship end-to-end features.</td>
+                <td>R350k–R900k/yr</td>
+                <td>$80k–$160k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Mobile App Dev (Android/iOS)</strong></td>
+                <td>Apps with Java/Kotlin or Swift/Flutter.</td>
+                <td>R300k–R850k/yr</td>
+                <td>$70k–$150k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Data Analyst</strong></td>
+                <td>Dashboards & insights (SQL, Python, Excel).</td>
+                <td>R250k–R600k/yr</td>
+                <td>$55k–$110k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Data Scientist / ML Engineer</strong></td>
+                <td>Models & ML systems (Python, ML libs).</td>
+                <td>R500k–R1.2m/yr</td>
+                <td>$100k–$180k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Cloud / DevOps Engineer</strong></td>
+                <td>Deploy, scale & automate (AWS/Azure, CI/CD).</td>
+                <td>R500k–R1.1m/yr</td>
+                <td>$100k–$170k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>Cybersecurity Analyst</strong></td>
+                <td>Secure systems, monitor threats.</td>
+                <td>R400k–R900k/yr</td>
+                <td>$90k–$160k/yr</td>
+              </tr>
+              <tr>
+                <td><strong>UI/UX Designer</strong></td>
+                <td>Research & design great user experiences.</td>
+                <td>R250k–R700k/yr</td>
+                <td>$60k–$130k/yr</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="muted" style="margin-top:8px">Ranges vary by city, experience, and company size.</p>
+        </section>
+
+        <!-- RIGHT: Benefits & How to learn -->
+        <aside class="card">
+          <h2>Why these careers?</h2>
+          <div class="list" style="margin-top:10px">
+            <div class="li"><span>✅</span>Strong demand & career growth</div>
+            <div class="li"><span>💼</span>Remote & hybrid opportunities</div>
+            <div class="li"><span>💸</span>Competitive salaries with rapid skill ROI</div>
+            <div class="li"><span>🚀</span>Project-based portfolios = fast hiring</div>
+          </div>
+
+          <h3 style="margin:16px 0 8px">How to learn (with ProGaming)</h3>
+          <ol class="list" style="counter-reset: step; list-style:none; padding:0">
+            <li class="li">1. Pick a track (Front-End, Back-End, Data, Mobile).</li>
+            <li class="li">2. Follow our guided roadmap (short videos + hands-on labs).</li>
+            <li class="li">3. Build 3–5 portfolio projects (we give specs & starter kits).</li>
+            <li class="li">4. Weekly challenges & streaks to keep momentum.</li>
+            <li class="li">5. Interview prep: quizzes, mock tests, and CV tips.</li>
+          </ol>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#">Start a Track</a>
+            <a class="btn" href="./Dashboard.html">Back to Dashboard</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- Auto-activate nav item -->
+  <script>
+
+    (function setActiveNav(){
+      const path = (location.pathname.split('/').pop() || 'career.html').toLowerCase();
+      document.querySelectorAll('.nav a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if (href === path) a.classList.add('active');
+      });
+    })();
+  </script>
+  <script>
+     /*-- option for themes --*/
+
+     const savedTheme = localStorage.getItem('theme') || 'light';
+     document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+</body>
+</html>
