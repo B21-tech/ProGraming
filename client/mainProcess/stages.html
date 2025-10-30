@@ -4,13 +4,43 @@
   <meta charset="UTF-8">
   <title>Course Stages</title>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../dashboardFolder/career.css">
 </head>
 <body>
+  <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div><span>ProGaming</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="../dashboardFolder/Dashboard.html"><span>🏠</span>Dashboard</a>
+        <a href="../dashboardFolder/course.html"><span>📚</span>Courses</a>
+        <a href="../dashboardFolder/career.html"><span>🧭</span>Career Path</a>
+      </nav>
+      <div class="spacer"></div>
+      <a class="btn ghost" href="../dashboardFolder/Dashboard.html">Back to Dashboard</a>
+    </header>
+
   <div class="container">
+  <section class="hero">
     <h1 id="courseTitle">Loading...</h1>
-    <div id="stageContainer"></div>
+    <p>Complete lessons and unlock new stages!</p>
+  </section>
+
+  <div id="stageContainer" class="stage-map">
+    <!-- Each level will be injected here by JS -->
+    <!-- Example for reference: -->
+    <!--
+    <div class="level">
+      <div class="stage unlocked">Stage 1: Variables</div>
+      <div class="stage unlocked current">Stage 2: Loops</div>
+      <div class="stage locked">Stage 3: Functions 🔒</div>
+    </div>
+    -->
   </div>
+</div>
+
 
   <script src="../src/stages.js"></script>
+  <script src="../dashboardFolder/dashboard.js"></script>
 </body>
 </html>

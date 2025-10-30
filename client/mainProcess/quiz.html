@@ -2,18 +2,57 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz</title>
-  <link rel="stylesheet" href="./quiz.css">
+  <link rel="stylesheet" href="./quiz.css" />
 </head>
 
 <body>
-  <div class="quiz-container">
+  <div class="quiz-header">
     <h1 id="stageTitle"></h1>
-    <div id="questionContainer"></div>
-    <button id="nextBtn">Next</button>
+  </div>
+  <div class="quiz-wrapper">
 
+    <div class="quiz-card">
+      <div id="questionContainer">
+        <h2 id="questionText">Loading question...</h2>
+
+        <div class="options-grid" id="optionsContainer"></div>
+
+        <div id="explanation" class="explanation hidden"></div>
+      </div>
+
+      <button id="nextBtn" class="next-btn">Next →</button>
+      <div id="completionModal" class="hidden">
+        <h2 id="modalTitle"></h2>
+        <p id="modalMessage"></p>
+
+        <!-- Shaky emoji for fail -->
+        <div id="sadEmoji" class="hidden" style="font-size: 50px; text-align:center;">💔</div>
+
+        <!-- XP bar container -->
+        <div class="xp-bar-container">
+          <div id="xpBar" class="xp-bar"></div>
+        </div>
+        <div id="animationContainer"></div>
+        <!-- Level up banner -->
+        <div id="levelUpBanner" class="hidden">Level Up! 🎉</div>
+
+        <!-- Buttons -->
+        <button id="nextStageBtn">Next Stage</button>
+        <button id="backToStages">Back to Stages</button>
+      </div>
+      <canvas id="confettiCanvas"></canvas>
+    </div>
+  </div>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <h2 id="popupTitle"></h2>
+      <p id="popupMessage"></p>
+      <button id="popupBtn">Back to Stage</button>
+    </div>
   </div>
 
   <script src="../src/quiz.js"></script>

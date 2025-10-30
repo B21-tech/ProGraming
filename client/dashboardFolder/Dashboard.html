@@ -17,7 +17,7 @@
       </div>
       <nav class="nav" aria-label="Primary">
         <a href="./Dashboard.html"><span>🏠</span>Dashboard</a>
-        <a href="#"><span>📚</span>Courses</a>
+        <a href="./course.html"><span>📚</span>Courses</a>
         <a href="./career.html"><span>🧭</span>Career Path</a>
       </nav>
       <div class="spacer"></div>
@@ -25,8 +25,8 @@
       <div class="profile-menu">
         <button class="avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false">
           👤
-          <span class="avatar-name" id="userName">Hi, Username</span>
-          <small id="userEmail">username@email.com</small>
+          <span class="avatar-name" id="userName"></span>
+          <small id="userEmail"></small>
         </button>
 
         <div class="menu" id="userMenu" role="menu">
@@ -45,7 +45,7 @@
       <div class="grid">
         <!-- LEFT -->
         <section>
-          <h1 id="greeting" class="greeting">Good Morning, Username!</h1>
+          <h1 id="greeting" class="greeting"></h1>
 
           <article class="course-hero" aria-label="Current course: Python">
             <div class="bot">
@@ -57,8 +57,8 @@
 
             <div class="hero-text">
               <div class="pill">📘 Course</div>
-              <div class="hero-title" id="userCourse">Python</div>
-              <div class="hero-sub">Learn the most popular language in the world</div>
+              <div class="hero-title" id="userCourse"></div>
+              <div class="hero-sub"></div>
             </div>
             <button class="btn" onclick="window.location.href='../mainProcess/stages.html'">Resume learning</button>
             <div class="dot-manu" title="More"><span class="dots">•••</span></div>
@@ -94,6 +94,36 @@
               <button class="cta blue">Start Language</button>
             </article>
           </div>
+
+          <div class="block-head">
+            <div class="section-title" style="margin:16px 0 0">Challenges</div>
+            <a class="link-quiet" href="#">Learn More</a>
+          </div> 
+
+          <div class="cards challenges">
+            <article class="card challenge">
+              <div>
+                <div class="micro">🏆 Challenge</div>
+                <div class="title">JavaScript Basics Quiz</div>
+              </div>
+              <button class="cta">Take Challenge</button>
+            </article>
+
+            <article class="card challenge">
+              <div>
+                <div class="micro">🏆 Challenge</div>
+                <div class="title">Python Functions Test</div>
+              </div>
+              <button class="cta">Take Challenge</button>
+            </article>
+
+            <article class="card challenge">
+              <div>
+                <div class="micro">🏆 Challenge</div>
+                <div class="title">C# OOP Quiz</div>
+              </div>
+              <button class="cta">Take Challenge</button>
+            </article>
         </section>
 
         <!-- RIGHT -->
@@ -144,7 +174,7 @@
       try {
         const res = await fetch("http://localhost:4000/api/dashboard", {
           method: "GET",
-          credentials: "include", // 👈 important
+          credentials: "include",
         });
 
         const data = await res.json();
@@ -182,7 +212,9 @@
 
           // Streak
           const streakContainer = document.getElementById("streak");
-          if (streakContainer) streakContainer.innerText = `🔥 Streak: ${data.streak}`;
+          if (streakContainer){
+            streakContainer.innerText = `🔥 Streak: ${data.streak}`;
+          } 
 
           // PROGRESS BAR UPDATE SECTION
           const barsContainer = document.querySelector(".bars");
@@ -229,7 +261,7 @@
 
 
         } else {
-          alert("❌ " + data.message);
+          alert(data.message);
         }
       } catch (err) {
         console.error("Error connecting to dashboard:", err);
@@ -251,11 +283,11 @@
         const data = await res.json();
 
         if (data.success) {
-          alert(`✅ Registered for ${courseName}`);
+          alert(`Registered for ${courseName}`);
           localStorage.setItem("selectedLanguage", courseName); // update active course
           loadDashboard(); // reload dashboard dynamically
         } else {
-          alert("❌ " + data.message);
+          alert(data.message);
         }
       } catch (err) {
         console.error("Error registering course:", err);

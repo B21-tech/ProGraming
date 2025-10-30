@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="./course.css" />
+  <link rel="JavaScript" href="courses.js" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <title>ProGaming – Courses</title>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div><span>ProGaming</span>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a href="./Dashboard.html"><span>🏠</span>Dashboard</a>
+      <a href="./course.html"><span>📚</span>Courses</a>
+      <a href="./career.html"><span>🧭</span>Career Path</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn-ghost" href="../dashboardFolder/Dashboard.html">Back</a>
+  </header>
+
+  <!-- Page -->
+  <main class="page">
+
+    <!-- smiling robot intro  -->
+    <section class="intro">
+      <svg class="robot" viewBox="0 0 120 120" aria-hidden="true">
+        <!-- body -->
+        <rect x="25" y="40" rx="14" ry="14" width="70" height="60" fill="#ffffff" />
+        <!-- eyes -->
+        <circle cx="50" cy="65" r="5" fill="#0f172a" />
+        <circle cx="80" cy="65" r="5" fill="#0f172a" />
+        <!-- smiling mouth -->
+        <path d="M50 80 Q65 90 80 80" stroke="#0f172a" stroke-width="4" fill="transparent" stroke-linecap="round" />
+        <!-- antenna -->
+        <line x1="60" y1="40" x2="60" y2="25" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+        <circle cx="60" cy="22" r="4" fill="#fff" />
+        <!-- arms -->
+        <rect x="12" y="52" width="16" height="10" rx="5" fill="#ffffff" />
+        <rect x="92" y="52" width="16" height="10" rx="5" fill="#ffffff" />
+      </svg>
+
+      <div>
+        <h1>These are the courses — start your journey!</h1>
+        <p>Pick a path, learn by doing, and build a portfolio that gets you hired.</p>
+      </div>
+    </section>
+
+
+    <h2 class="section-title">All Courses</h2>
+
+    <!-- Courses grid -->
+    <section class="grid">
+
+      <!-- Python -->
+      <article class="course-card">
+        <div class="icon">🐍</div>
+        <div>
+          <h3>Python</h3>
+          <p>Beginner-friendly language used for data analysis, automation, web back-ends, and machine learning.</p>
+          <div class="tags">
+            <span class="tag">Beginner</span><span class="tag">Data</span><span class="tag">Back-end</span>
+          </div>
+          <div class="actions">
+            <a class="btn start" href="../mainProcess/stages.html">Start course</a>
+            <a class="btn outline" href="syllabus-python.html">View syllabus</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- JavaScript -->
+      <article class="course-card">
+        <div class="icon">🟨</div>
+        <div>
+          <h3>JavaScript</h3>
+          <p>The language of the web. Build interactive websites, SPAs, and full-stack apps with Node.js.</p>
+          <div class="tags">
+            <span class="tag">Front-end</span><span class="tag">Full-stack</span>
+          </div>
+          <div class="actions">
+            <a class="btn start" href="../mainProcess/stages.html">Start course</a>
+            <a class="btn outline" href="syllabus-javascript.html">View syllabus</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- HTML & CSS -->
+      <!-- <article class="course-card">
+        <div class="icon">📘</div>
+        <div>
+          <h3>HTML &amp; CSS</h3>
+          <p>Structure and style the web. Learn responsive layouts, modern CSS, and accessibility best practices.</p>
+          <div class="tags">
+            <span class="tag">Foundations</span><span class="tag">Responsive</span>
+          </div>
+          <div class="actions">
+            <a class="btn start" href="#">Start course</a>
+            <a class="btn outline" href="syllabus-html-css.html">View syllabus</a>
+          </div>
+        </div>
+      </article> -->
+
+      <!-- C# -->
+      <article class="course-card">
+        <div class="icon">#️⃣</div>
+        <div>
+          <h3>C# (C-Sharp)</h3>
+          <p>Build enterprise apps, games (Unity), and APIs using C#, .NET, and modern tooling.</p>
+          <div class="tags">
+            <span class="tag">Back-end</span><span class="tag">Enterprise</span><span class="tag">Unity</span>
+          </div>
+          <div class="actions">
+            <a class="btn start" href="../mainProcess/stages.html">Start course</a>
+            <a class="btn outline" href="syllabus-csharp.html">View syllabus</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Python Challenge -->
+      <article class="course-card">
+        <div class="icon">🧩</div>
+        <div>
+          <h4>Python Challenge</h4>
+          <p>Sharpen your problem-solving with timed katas and real-world tasks. Earn streaks & badges.</p>
+          <div class="tags">
+            <span class="tag">Practice</span><span class="tag">Algorithms</span>
+          </div>
+          <div class="actions">
+            <a class="btn start" href="#">Start challenge</a>
+            <a class="btn outline" href="#">See challenges</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="note">Tip: keep your streak going — complete a lesson or challenge each day.</p>
+  </main>
+  <script src="../src/mainCourse.js"></script>
+</body>
+
+</html>

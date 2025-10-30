@@ -62,9 +62,9 @@ form.addEventListener("submit", async (e) => {
         localStorage.setItem("username", user.username);
       }
 
-      console.log("✅ Stored userId:", localStorage.getItem("userId"));
-      console.log("✅ Stored selectedLanguage:", localStorage.getItem("selectedLanguage"));
-      console.log("✅ Stored email:", localStorage.getItem("email"));
+      console.log("Stored userId:", localStorage.getItem("userId"));
+      console.log("Stored selectedLanguage:", localStorage.getItem("selectedLanguage"));
+      console.log("Stored email:", localStorage.getItem("email"));
 
       messageBox.innerText = "✅ Login Successful, Redirecting...";
 
