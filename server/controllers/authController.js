@@ -67,7 +67,7 @@ export const register = async (req, res) => {
         };
         await transporter.sendMail(mailOption);
 
-        // ✅ Send proper success response
+        // Send proper success response
         return res.status(200).json({
             success: true,
             message: "Signup successful! OTP has been sent to your email.",
@@ -107,7 +107,7 @@ export const login = async (req, res) => {
 
     const userCourseId = user.selectedLanguage; 
 
-    // ✅ Send OnboardingComplete field
+    // Send OnboardingComplete field
     return res.status(200).json({
       success: true,
       token,
@@ -337,7 +337,7 @@ export const completeOnboarding = async (req, res) => {
             userId,
             {
                 selectedLanguage,
-                OnboardingComplete: true, // ✅ correct casing
+                OnboardingComplete: true, 
                 progress: { [selectedLanguage]: { level: 1, completed: [] } }
             },
             { new: true }

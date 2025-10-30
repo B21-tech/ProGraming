@@ -1,5 +1,5 @@
 import express from 'express';
-import { completeStage, getUserProgress, InitializeProgress, registerCourse } from "../controllers/progressController.js";
+import { completeStage, getUserProgress, InitializeProgress, registerCourse, switchCourse } from "../controllers/progressController.js";
 import userAuth from '../middleware/userAuth.js';
 
 import userModel from '../models/userModel.js';
@@ -45,5 +45,6 @@ router.get("/:userId/full", userAuth, async (req, res) => {
 
 /////// NEWWWWW /////
 router.post("/registerCourse", userAuth, registerCourse);
+router.post("/switchCourse", userAuth, switchCourse);
 
 export default router;

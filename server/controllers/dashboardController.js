@@ -34,7 +34,7 @@
 //       username: user.username,
 //       selectedLanguage: lang,
 //       OnboardingComplete: user.OnboardingComplete,
-//       progress, // ✅ include progress
+//       progress, // include progress
 //     });
 //   } catch (error) {
 //     console.error("Dashboard error:", error);
@@ -109,8 +109,6 @@ export const getDashboard = async (req, res) => {
       if (activeStreak > streak) streak = activeStreak;
     }
 
-
-
     res.json({
       success: true,
       greeting: `${greeting}, ${user.username}`,
@@ -118,7 +116,7 @@ export const getDashboard = async (req, res) => {
       selectedLanguage: lang,
       OnboardingComplete: user.OnboardingComplete,
       progress,
-      recommendedCourses, // ✅ now from DB
+      recommendedCourses, 
       totalXP,
       topCourses,
       streak,

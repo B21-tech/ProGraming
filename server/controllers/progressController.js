@@ -144,17 +144,25 @@ export const getUserProgress = async (req, res) => {
     const user = await userModel.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
     }
-    const lang = user.selectedLanguage;
-    const progress = user.progress.get(lang) || null;
 
-    res.json({ language: lang, progress });
-  }
-  catch (err) {
-    res.status(500).json({ error: err.message });
+    // Get all courses (Map → Object)
+    const progress = Object.fromEntries(user.progress.entries());
+
+    res.json({
+      success: true,
+      userId,
+      progress,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
+
+
+
 
 // stage controller 
 export const getStagesByCourse = async (req, res) => {
@@ -260,3 +268,29 @@ export const registerCourse = async (req, res) => {
   }
 };
 
+
+// NEWWWW
+export const switchCourse = async (req, res) => {
+  try {
+    const { userId, courseName } = req.body;
+    if (!userId || !courseName) {
+      return res.status(400).json({ success: false, message: "Missing userId or courseName" });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+
+    if (!user.progress.has(courseName)) {
+      return res.status(400).json({ success: false, message: "Course not registered yet" });
+    }
+
+    // Update selected language
+    user.selectedLanguage = courseName;
+    await user.save();
+
+    res.json({ success: true, message: `Switched to ${courseName}`, selectedLanguage: courseName });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};

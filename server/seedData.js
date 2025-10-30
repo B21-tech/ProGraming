@@ -10,9 +10,9 @@ dotenv.config();
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
-    console.log("✅ MongoDB connected");
+    console.log("MongoDB connected");
   } catch (err) {
-    console.error("❌ Error connecting to MongoDB:", err.message);
+    console.error("Error connecting to MongoDB:", err.message);
     process.exit(1);
   }
 };
@@ -25,7 +25,7 @@ const seedData = async () => {
     await Stage.deleteMany();
     await Level.deleteMany();
     await Course.deleteMany();
-    console.log("🗑️ Course, Level, and Stage collections cleared");
+    console.log("Course, Level, and Stage collections cleared");
 
     // Define courses with realistic levels and stages
     const coursesData = [
@@ -117,10 +117,10 @@ const seedData = async () => {
       }
     }
 
-    console.log("✅ Sample data seeded successfully!");
+    console.log("Sample data seeded successfully!");
     process.exit(0);
   } catch (err) {
-    console.error("❌ Seeding failed:", err.message);
+    console.error("Seeding failed:", err.message);
     process.exit(1);
   }
 };
