@@ -1,7 +1,7 @@
 // API ENDPOINT
 import express from "express"
 import { completeOnboarding, isAuthenticated, login, logout, register, resendUserOtp, resetPassWord, sendVerifyOtp, verifyEmail } from "../controllers/authController.js";
-import { getDashboard } from "../controllers/dashboardController.js";
+import { addXp, getDashboard } from "../controllers/dashboardController.js";
 import userAuth from "../middleware/userAuth.js";
 
 // creating a router 
@@ -27,5 +27,6 @@ authRouter.post("/onboarding", userAuth, completeOnboarding)
 
 // dashboard here
 authRouter.get("/dashboard", userAuth, getDashboard);
+authRouter.post("/addXP", userAuth, addXp);
 
 export default authRouter;

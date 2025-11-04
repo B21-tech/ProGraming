@@ -62,14 +62,36 @@ export const getDashboard = async (req, res) => {
     else if (hour < 18) greeting = "Good Afternoon";
     else greeting = "Good Evening";
 
-    // Fetch all courses from DB
-    const allCoursesDocs = await Course.find({}, "name").lean(); // only get name
+    // Fetch all courses
+    const allCoursesDocs = await Course.find({}, "name").lean();
     const allCourses = allCoursesDocs.map(course => course.name);
 
-    // Courses user has already registered
     const progressMap = user.progress || new Map();
 
-    // Convert everything to lowercase for comparison
+    // 🔥 Reset streaks if user skipped a day
+    let streakReset = false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let [courseName, courseProgress] of progressMap.entries()) {
+      const lastStreakDate = courseProgress.lastStreakDate ? new Date(courseProgress.lastStreakDate) : null;
+      if (lastStreakDate) {
+        lastStreakDate.setHours(0, 0, 0, 0);
+        const diffDays = (today - lastStreakDate) / (1000 * 60 * 60 * 24);
+
+        if (diffDays > 1 && courseProgress.streak !== 0) {
+          courseProgress.streak = 0;
+          user.progress.set(courseName, courseProgress);
+          streakReset = true;
+        }
+      }
+    }
+
+    if (streakReset) {
+      await user.save();
+    }
+
+    // Convert to lowercase for comparison
     const registeredCourses = Array.from(progressMap.keys()).map(course => course.toLowerCase());
     if (user.selectedLanguage) {
       registeredCourses.push(user.selectedLanguage.toLowerCase());
@@ -83,9 +105,8 @@ export const getDashboard = async (req, res) => {
     const lang = user.selectedLanguage;
     const progress = lang ? user.progress.get(lang) : null;
 
-
     let totalXP = 0;
-    let streak = 0; // global streak
+    let streak = 0;
     const topCourses = [];
 
     for (let [courseName, courseProgress] of progressMap.entries()) {
@@ -93,18 +114,16 @@ export const getDashboard = async (req, res) => {
       totalXP += xp;
       topCourses.push({ name: courseName, xp });
 
-      // Update global streak as the max among all courses
       if (courseProgress.streak > streak) streak = courseProgress.streak;
     }
 
-    // Include active course if missing from progressMap
+    // Include active course if missing
     if (user.selectedLanguage && !topCourses.find(c => c.name === user.selectedLanguage)) {
       const activeProgress = user.progress.get(user.selectedLanguage);
       const xp = activeProgress?.totalXP || 0;
       topCourses.push({ name: user.selectedLanguage, xp });
 
       totalXP += xp;
-      // Also consider active course streak
       const activeStreak = activeProgress?.streak || 0;
       if (activeStreak > streak) streak = activeStreak;
     }
@@ -116,17 +135,50 @@ export const getDashboard = async (req, res) => {
       selectedLanguage: lang,
       OnboardingComplete: user.OnboardingComplete,
       progress,
-      recommendedCourses, 
+      recommendedCourses,
       totalXP,
       topCourses,
       streak,
     });
-
-
-
   } catch (error) {
     console.error("Dashboard error:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
+
+export const addXp = async (req, res) => {
+  try{
+    const user = await userModel.findById(req.userId);
+    if(!user)
+      return res.status(404).json({success: false, message: "User not found"});
+
+    const { amount } = req.body;
+    if(!amount || isNaN(amount)){
+      return res.status(400).json({success: false, message: "Invalid XP amount"});
+    }
+    // finding the user's progress map
+    const selectedCourse = user.selectedLanguage;
+    if (!selectedCourse) {
+      return res.status(400).json({ success: false, message: "No active course selected" });
+    }
+
+    // get user progress from that code 
+    const courseProgress = user.progress.get(selectedCourse) || { totalXP: 0, streak: 0 };
+    courseProgress.totalXP = (courseProgress.totalXP || 0) + Number(amount);
+
+    // update the user's progress map
+    user.progress.set(selectedCourse, courseProgress);
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Added ' + amount + ' XP to ' + selectedCourse,
+      totalXP: courseProgress.totalXP
+    });
+  }
+  catch(error){
+    console.error("Add XP error: ", error);
+    res.status(500).json({success: false, message: error.message});
+  }
+}
