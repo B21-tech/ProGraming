@@ -374,8 +374,7 @@ button,
 button:hover,
 .btn:hover,
 .cta:hover {
-  background: var(--primary);
-  color: #fff;
+  color: var(--primary);
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
@@ -463,12 +462,6 @@ button:active,
   background: #16a34a;
   color: #fff;
   border-color: transparent;
-}
-
-.challenges{
-  overflow-x: hidden;
-  height: 200px;
-  top: 20px;
 }
 
 .block-head {
@@ -621,7 +614,7 @@ button:active,
   width: 45%;
 }
 
-.promo {
+.promo, .challenge {
   background: linear-gradient(135deg, #0b59ff 0%, #1562ff 50%, #7aa1ff 100%);
   color: white;
   border-radius: 18px;
@@ -633,9 +626,14 @@ button:active,
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.promo::after {
+.challenge > div > p{
+  font-weight: 600;
+  color: var(--ink-on-dark);
+}
+.promo::after, .challenge::after {
   content: "";
   position: absolute;
   top: 0;
@@ -667,23 +665,111 @@ button:active,
   border: 3px solid #2c63ff;
 }
 
-.promo .copy {
+.challenge .bot{
+  background: #fbfcff;
+  border: 3px solid #2c63ff;
+}
+
+.promo .copy, .challenge .copy {
   font-size: 22px;
   font-weight: 900;
   line-height: 1.25;
 }
 
-.promo .cta {
+.promo .cta, .challenge .cta {
   margin-top: 10px;
   display: inline-block;
   background: white;
   color: #0b53ff;
   font-weight: 900;
   border-radius: 999px;
-  padding: 10px 16px;
+  padding: 10px 100px;
   border: 2px solid #e8edff;
   position: relative;
   z-index: 2;
+}
+
+/* Coding challenge */
+.typing-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 15px;
+  padding: 25px;
+  width: 500px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+.popup-content h2{
+  color: var(--ink);
+}
+
+.snippet {
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-family: monospace;
+  text-align: left;
+  font-size: 18px;
+}
+
+#userInput {
+  width: 100%;
+  height: 100px;
+  font-family: monospace;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+#startBtn, #submitBtn {
+  margin-top: 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 20px 100px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#startBtn:hover, #submitBtn:hover {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.hidden {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
 }
 
 /* ------- Dot Menu Improvements ------- */

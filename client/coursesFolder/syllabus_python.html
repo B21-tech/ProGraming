@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ProGaming – Python Syllabus</title>
+<link rel="stylesheet" href="syllabus.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div><span>ProGaming</span>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a href="../dashboardFolder/Dashboard.html"><span>🏠</span>Dashboard</a>
+      <a href="../dashboardFolder/course.html"><span>📚</span>Courses</a>
+      <a href="../dashboardFolder/career.html"><span>🧭</span>Career Path</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn-ghost" href="../dashboardFolder/Dashboard.html">Back</a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h1>Python — What you'll learn</h1>
+      <p class="muted">From absolute basics to building real programs with functions, data structures and modules.</p>
+    </section>
+
+    <!-- Beginner -->
+    <section class="card">
+      <span class="badge">Beginner</span>
+      <div class="level">
+        <div class="topic">
+          <b>Variables &amp; Data Types</b>
+          <span>Numbers, strings, booleans; naming, assignment and basic operations.</span>
+        </div>
+        <div class="topic">
+          <b>Operators</b>
+          <span>Arithmetic, comparison, logical and membership operators in everyday code.</span>
+        </div>
+        <div class="topic">
+          <b>Conditionals</b>
+          <span>Control flow with <code>if/elif/else</code>; input validation and simple decision trees.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intermediate -->
+    <section class="card">
+      <span class="badge">Intermediate</span>
+      <div class="level">
+        <div class="topic">
+          <b>Loops</b>
+          <span>Iterate with <code>for</code> and <code>while</code>, loop patterns and comprehension previews.</span>
+        </div>
+        <div class="topic">
+          <b>Functions</b>
+          <span>Parameters, return values, scope; write reusable utilities and pure functions.</span>
+        </div>
+        <div class="topic">
+          <b>Lists &amp; Tuples</b>
+          <span>Sequence operations, slicing, common methods and immutability vs. mutability.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advanced -->
+    <section class="card">
+      <span class="badge">Advanced</span>
+      <div class="level">
+        <div class="topic">
+          <b>Dictionaries</b>
+          <span>Key–value data, counting/frequency maps, nested dicts and practical patterns.</span>
+        </div>
+        <div class="topic">
+          <b>Classes</b>
+          <span>Objects, methods, constructors; model real-world entities with OOP basics.</span>
+        </div>
+        <div class="topic">
+          <b>Modules &amp; Packages</b>
+          <span>Organize larger programs, import libraries, create your own modules and packages.</span>
+        </div>
+      </div>
+      <div class="actions">
+        <!-- <a class="btn primary" href="#">Start Python Track</a> -->
+        <a class="btn" href="../dashboardFolder/course.html">Back</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // persist theme if you use dark-mode elsewhere
+    const saved = localStorage.getItem('theme')||'light';
+    document.documentElement.setAttribute('data-theme', saved);
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="stylesheet" href="./syllabus.css"/>
+<title>ProGaming – JavaScript Syllabus</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="dot"></div><span>ProGaming</span>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a href="../dashboardFolder/Dashboard.html"><span>🏠</span>Dashboard</a>
+      <a href="../dashboardFolder/course.html"><span>📚</span>Courses</a>
+      <a href="../dashboardFolder/career.html"><span>🧭</span>Career Path</a>
+    </nav>
+    <div class="spacer"></div>
+    <a class="btn-ghost" href="../dashboardFolder/Dashboard.html">Back</a>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <h1>JavaScript — What you'll learn</h1>
+      <p class="muted">Go from fundamentals to building interactive UIs and full-stack apps with modern JS.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Beginner</span>
+      <div class="level">
+        <div class="topic"><b>Variables &amp; Data Types</b><span>Numbers, strings, booleans; <code>let</code>, <code>const</code>, and dynamic typing.</span></div>
+        <div class="topic"><b>Operators &amp; Expressions</b><span>Arithmetic, comparison, logical and truthy/falsey behavior.</span></div>
+        <div class="topic"><b>Conditionals</b><span><code>if/else</code>, ternaries, and guard clauses for clear logic.</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="badge">Intermediate</span>
+      <div class="level">
+        <div class="topic"><b>Loops</b><span><code>for</code>, <code>while</code>, <code>for...of</code>, and common iteration patterns.</span></div>
+        <div class="topic"><b>Functions</b><span>Declarations, expressions, arrow functions, parameters & returns.</span></div>
+        <div class="topic"><b>Arrays</b><span>Array methods (<code>map</code>, <code>filter</code>, <code>reduce</code>), immutability basics.</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="badge">Advanced</span>
+      <div class="level">
+        <div class="topic"><b>Objects</b><span>Object literals, property access, cloning and destructuring.</span></div>
+        <div class="topic"><b>Classes</b><span>Prototypes vs. classes, constructors, methods, inheritance.</span></div>
+        <div class="topic"><b>Async &amp; Promises</b><span>Promises, <code>async/await</code>, fetch APIs and error handling.</span></div>
+      </div>
+      <div class="actions">
+        <!-- <a class="btn primary" href="#">Start JavaScript Track</a> -->
+        <a class="btn" href="../dashboardFolder/course.html">Back</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const saved = localStorage.getItem('theme')||'light';
+    document.documentElement.setAttribute('data-theme', saved);
+  </script>
+</body>
+</html>

@@ -30,6 +30,7 @@
         </button>
 
         <div class="menu" id="userMenu" role="menu">
+          <button class="menu-item" id="logout" role="menuitem"> Logout </button>
           <button class="menu-item" id="deleteCourseBtn" role="menuitem"> Delete a course</button>
           <div class="menu-sep"></div>
           <label class="menu-item theme-toggle" role="menuitem">
@@ -66,7 +67,7 @@
 
           <div class="block-head">
             <div class="section-title" style="margin:16px 0 0">Recommended for you</div>
-            <a class="link-quiet" href="#">Learn More</a>
+            <a class="link-quiet" href="./career.html">Learn More</a>
           </div>
 
           <div class="cards">
@@ -97,33 +98,38 @@
 
           <div class="block-head">
             <div class="section-title" style="margin:16px 0 0">Challenges</div>
-            <a class="link-quiet" href="#">Learn More</a>
-          </div> 
+            <!-- <a class="link-quiet" href="#">Learn More</a> -->
+          </div>
 
-          <div class="cards challenges">
-            <article class="card challenge">
-              <div>
-                <div class="micro">🏆 Challenge</div>
-                <div class="title">JavaScript Basics Quiz</div>
+          <section class="challenge">
+            <div class="bot">
+              <div class="cheeks">
+                <div class="cheek"></div>
+                <div class="cheek"></div>
               </div>
-              <button class="cta">Take Challenge</button>
-            </article>
+            </div>
+            <div>
+              <div class="copy">Coding Speed Challenge!</div>
+              <p>How fast can you type? Think you can handle the pressure?</p>
+              <a class="cta" id="cta">Let's do it</a>
+            </div>
 
-            <article class="card challenge">
-              <div>
-                <div class="micro">🏆 Challenge</div>
-                <div class="title">Python Functions Test</div>
+            <!-- Coding challenge -->
+            <div id="typingPopup" class="typing-popup hidden">
+              <div class="popup-content">
+                <span id="closePopup" class="close">&times;</span>
+                <h2>⚡ Code Typing Challenge</h2>
+                <p id="snippetDisplay" class="snippet"></p>
+                <textarea id="userInput" placeholder="Type the code here..."></textarea>
+                <div class="stats">
+                  <p>Time: <span id="time">0</span>s</p>
+                  <p>Accuracy: <span id="accuracy">0%</span></p>
+                </div>
+                <button id="startBtn">Start</button>
+                <button id="submitBtn" class="hidden">Finish</button>
               </div>
-              <button class="cta">Take Challenge</button>
-            </article>
-
-            <article class="card challenge">
-              <div>
-                <div class="micro">🏆 Challenge</div>
-                <div class="title">C# OOP Quiz</div>
-              </div>
-              <button class="cta">Take Challenge</button>
-            </article>
+            </div>
+          </section>
         </section>
 
         <!-- RIGHT -->
@@ -161,7 +167,7 @@
             </div>
             <div>
               <div class="copy">Check out different career paths in IT!</div>
-              <a class="cta" href="#">View Careers</a>
+              <a class="cta" href="./career.html">View Careers</a>
             </div>
           </section>
         </aside>
@@ -181,6 +187,15 @@
 
         if (data.success) {
           console.log("✅ Dashboard data:", data);
+
+          function formatCourseName(name) {
+            const map = {
+              "c#": "C#",
+              "Javascript": "JavaScript",
+              "Python": "Python",
+            };
+            return map[name?.toLowerCase()] || name;
+          }
 
           // display email
           const emailContainer = document.getElementById("userEmail");
@@ -203,30 +218,30 @@
           const courseContainer = document.getElementById("userCourse");
           const selectedLanguage = localStorage.getItem("selectedLanguage");
           if (courseContainer && selectedLanguage) {
-            courseContainer.innerText = selectedLanguage;
+            courseContainer.innerText = formatCourseName(selectedLanguage);
           }
 
           // XP points
           const xpContainer = document.getElementById("xpPoints");
-          if (xpContainer) xpContainer.innerText = `💎 XP: ${data.totalXP}`;
+          if (xpContainer) xpContainer.innerText = '💎 XP: ' + data.totalXP;
 
           // Streak
           const streakContainer = document.getElementById("streak");
-          if (streakContainer){
-            streakContainer.innerText = `🔥 Streak: ${data.streak}`;
-          } 
+          if (streakContainer) {
+            streakContainer.innerText = '🔥 Streak: ' + data.streak;
+          }
 
           // PROGRESS BAR UPDATE SECTION
           const barsContainer = document.querySelector(".bars");
           if (barsContainer) {
             barsContainer.innerHTML = "";
-            const MAX_XP = 500; // adjust dynamically if needed
+            const MAX_XP = 2000;
 
             data.topCourses.forEach((course) => {
               const percentage = Math.min((course.xp / MAX_XP) * 100, 100).toFixed(1);
               const barHTML = `
           <div class="bar">
-            <label>${course.name}</label>
+            <label>${formatCourseName(course.name)}</label>
             <div class="track">
               <div class="fill" style="width:${percentage}%"></div>
             </div>
@@ -249,7 +264,7 @@
           <article class="card ${colors[index] || ""}">
             <div>
               <div class="micro">📘 Course</div>
-              <div class="title">${course}</div>
+              <div class="title">${formatCourseName(course)}</div>
             </div>
             <button class="cta" onclick="registerCourse('${course}')">Start Language</button>
           </article>
@@ -295,11 +310,43 @@
       }
     }
 
+    // Logout
+    const logoutBtn = document.getElementById("logout");
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/logout", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Clear token and redirect to login
+          localStorage.removeItem("token");
+          alert("👋 You've been logged out successfully!");
+          window.location.href = "../index.html"; // or wherever your login page is
+        } else {
+          alert("Logout failed. Please try again.");
+        }
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert("Something went wrong. Try again later.");
+      }
+    });
+
+
     loadDashboard();
 
 
   </script>
   <script src="./dashboard.js"></script>
+  <script src="./challenge.js"></script>
 
 
 </body>

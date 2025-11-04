@@ -10,7 +10,7 @@ if (!userId || !token) {
 function normalizeName(name) {
     const map = {
         "JavaScript": "Javascript",
-        "C# (C-Sharp)": "C#",
+        "C# (C-Sharp)": "c#",
         "Python Challenge": "Python",
     };
     return map[name] || name.trim();

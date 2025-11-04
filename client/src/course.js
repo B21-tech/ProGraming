@@ -40,6 +40,7 @@ nextBtn.onclick = async function() {
   try {
     const response = await fetch('/api/authorize/onboarding', { 
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${localStorage.getItem('token')}`
@@ -50,7 +51,9 @@ nextBtn.onclick = async function() {
     const data = await response.json();
 
     if (data.success) {
-      // ✅ Redirect only after saving to DB
+      // Redirect only after saving to DB
+      // Made changes here 
+      localStorage.setItem("selectedLanguage", selectedLanguage);
       window.location.href = "../dashboardFolder/dashboard.html";
     } else {
       alert(data.message || "Something went wrong");

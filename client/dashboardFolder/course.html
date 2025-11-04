@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./course.css" />
   <link rel="JavaScript" href="courses.js" />
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <title>ProGaming – Courses</title>
 </head>
 
@@ -69,7 +70,7 @@
           </div>
           <div class="actions">
             <a class="btn start" href="../mainProcess/stages.html">Start course</a>
-            <a class="btn outline" href="syllabus-python.html">View syllabus</a>
+            <a class="btn outline" href="../coursesFolder/syllabus_python.html">View syllabus</a>
           </div>
         </div>
       </article>
@@ -85,7 +86,7 @@
           </div>
           <div class="actions">
             <a class="btn start" href="../mainProcess/stages.html">Start course</a>
-            <a class="btn outline" href="syllabus-javascript.html">View syllabus</a>
+            <a class="btn outline" href="../coursesFolder/syllabus_javascript.html">View syllabus</a>
           </div>
         </div>
       </article>
@@ -117,7 +118,7 @@
           </div>
           <div class="actions">
             <a class="btn start" href="../mainProcess/stages.html">Start course</a>
-            <a class="btn outline" href="syllabus-csharp.html">View syllabus</a>
+            <a class="btn outline" href="../coursesFolder/syllabus_csharp.html">View syllabus</a>
           </div>
         </div>
       </article>
@@ -142,6 +143,22 @@
 
     <p class="note">Tip: keep your streak going — complete a lesson or challenge each day.</p>
   </main>
+  <script>
+
+    (function setActiveNav(){
+      const path = (location.pathname.split('/').pop() || 'career.html').toLowerCase();
+      document.querySelectorAll('.nav a').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        if (href === path) a.classList.add('active');
+      });
+    })();
+  </script>
+  <script>
+     /*-- option for themes --*/
+
+     const savedTheme = localStorage.getItem('theme') || 'light';
+     document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
   <script src="../src/mainCourse.js"></script>
 </body>
 

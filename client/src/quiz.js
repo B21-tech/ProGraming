@@ -109,7 +109,6 @@ nextBtn.onclick = () => {
   showQuestion();
 };
 
-// 🎯 Complete stage and show popup (unchanged behaviour)
 // Confetti setup
 const confettiCanvas = document.getElementById("confettiCanvas");
 const ctx = confettiCanvas.getContext("2d");
@@ -178,7 +177,7 @@ async function completeStage(score, total) {
     const percent = (score / total) * 100;
 
     if (data.unlocked) {
-      // 🎉 Success path
+      // Success path
       modalTitle.textContent = "🎉 Stage Complete!";
       modalMessage.textContent = `You unlocked the next stage! Score: ${score}/${total}`;
       nextBtn.style.display = "inline-block";
@@ -203,13 +202,11 @@ async function completeStage(score, total) {
       }, 20);
 
     } else {
-      // 😔 Sad path
       modalTitle.textContent = "😔 Stage Incomplete";
       modalMessage.textContent = `You scored ${score}/${total}. You need 60% to unlock the next stage. You can do it! 💪`;
 
       nextBtn.style.display = "none"; // Hide next stage button
 
-      // Shaking 💔 emoji
       const sadEmoji = document.createElement("div");
       sadEmoji.textContent = "💔";
       sadEmoji.style.display = "inline-block";

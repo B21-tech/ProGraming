@@ -1,0 +1,157 @@
+  :root{
+    --bg:#f6f8fb;
+    --surface:#fff;
+    --text:#111827;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+    --primary:#1661ff;
+    --chip:#e8eeff;
+    --shadow:0 8px 18px rgba(15,23,42,.08)
+  }
+
+  html[data-theme="dark"]
+  
+  {--bg:#0b0f19;
+    --surface:#0f1629;
+    --text:#e5e7eb;
+    --muted:#9aa4b2;
+    --border:#1f2a44;
+    --chip:#163a7a;
+    --shadow:0 10px 24px rgba(0,0,0,.35)
+  }
+
+  *{
+    box-sizing:border-box
+  }
+  
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial
+  }
+
+  a{
+    color:inherit;
+    text-decoration:none
+  }
+  
+  .topbar{
+    background:#0f1117;
+    color:#e5e7eb;
+    padding:14px 18px;
+    display:flex;
+    gap:18px;
+    align-items:center
+  }
+
+  .nav{
+    display:flex;
+    gap:16px}
+    
+  .nav a{
+    padding:8px 10px;
+    border-radius:10px;
+    color:#d1d5db;
+    font-weight:700;
+  }
+  
+  .nav a:hover{
+      background:#1a1f2e;
+    }
+
+  .spacer{
+    flex:1;
+  } 
+  .page{
+    padding:24px;
+    max-width:980px;
+    margin:0 auto;
+  }
+
+  .hero{
+    background:linear-gradient(90deg,#1d4ed8,#3b82f6,#2563eb);
+    color:#fff;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  h1{
+    margin:0 0 6px;
+    font-size:28px;
+  }
+   p.muted{
+    color:#e9edff;
+    margin:6px 0 0;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;padding:18px;
+    box-shadow:var(--shadow);
+    margin-top:18px;
+  }
+
+  .level{
+    display:grid;
+    gap:10px;
+    margin-top:8px;
+  } 
+
+  .badge{
+    display:inline-block;
+    background:var(--chip);
+    color:#0b53ff;
+    border-radius:999px;
+    padding:6px 10px;
+    font-weight:800;
+  }
+
+  html[data-theme="dark"] 
+  
+  .badge{
+    color:#e5f0ff;
+  }
+
+  .topic{
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:12px;
+  }
+
+  .topic b{
+    display:block;
+    margin-bottom:4px;
+  }
+
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+  }
+  
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    font-weight:800;
+  }
+
+  .btn.primary{
+    background:#fff;
+    color:#0b53ff;
+    border:2px solid #e8edff;
+  }
+
+  .btn.primary:hover{
+    background:#facc15;
+    color:#111;
+    border-color:#eab308;
+  }
