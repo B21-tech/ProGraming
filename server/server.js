@@ -43,6 +43,9 @@ app.use('/api/stages', stageRoutes);
 // user progress routes
 app.use("/api/progress", progressRoutes);
 
+// Neww
+app.use("/api/leaderboard", progressRoutes);
+
 // generate questions for the users
 app.use('/api/questions', questionRoutes);
 

@@ -153,14 +153,14 @@ const seedQuestions = async () => {
                         questions: [
                             {
                                 text: "Which loop checks the condition first?",
-                                options: ["for", "while", "do-while", "foreach"],
+                                options: ["for loop", "while", "do-while", "foreach"],
                                 correctAnswer: "while",
                                 explanation:
                                     "while evaluates the condition before the loop runs.",
                             },
                             {
                                 text: "What type of loop is best for iterating arrays?",
-                                options: ["for", "foreach", "while", "do-while"],
+                                options: ["for loop", "foreach", "while", "do-while"],
                                 correctAnswer: "foreach",
                                 explanation:
                                     "foreach iterates over collections easily.",
@@ -178,6 +178,108 @@ const seedQuestions = async () => {
                                 correctAnswer: "Skips current iteration",
                                 explanation:
                                     "continue jumps to the next iteration.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Methods",
+                        levelName: "Intermediate",
+                        questions: [
+                            {
+                                text: "What is the main purpose of a method in C#?",
+                                options: ["To store data permanently", "To execute a specific block of code when called", "To define a class", "To initialize an array"],
+                                correctAnswer: "To execute a specific block of code when called",
+                                explanation:
+                                    "Methods are reusable blocks of code that perform a specific task when called.",
+                            },
+                            {
+                                text: "Which keyword is used to define a method that doesn't return any value?",
+                                options: ["void", "return", "null", "none"],
+                                correctAnswer: "void",
+                                explanation:
+                                    "The void keyword specifies that a method does not return a value.",
+                            },
+                            {
+                                text: "What is a parameter in a method?",
+                                options: ["A global variable", "A variable passed into a method", "A constant value", "A data type"],
+                                correctAnswer: "A variable passed into a method",
+                                explanation:
+                                    "Parameters allow data to be passed into methods for use inside them.",
+                            },
+                            {
+                                text: "What is the return type of this method: \n int Add(int a, int b)?",
+                                options: ["void", "int", "string", "bool"],
+                                correctAnswer: "int",
+                                explanation:
+                                    "The method returns an integer since its return type is int.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Arrays & Lists",
+                        levelName: "Intermediate",
+                        questions: [
+                            {
+                                text: "What is the index of the first element in an array in C#?",
+                                options: ["0", "1", "-1", "Depends on the type"],
+                                correctAnswer: "0",
+                                explanation:
+                                    "C# arrays are zero-indexed, so the first element is at index 0.",
+                            },
+                            {
+                                text: "Which syntax correctly initializes an array of integers?",
+                                options: ["int[] nums = new int[5];", "array nums = int[5];", "int nums = array[5];", "int[5] nums;"],
+                                correctAnswer: "int[] nums = new int[5];",
+                                explanation:
+                                    "Arrays use the new keyword to allocate memory.",
+                            },
+                            {
+                                text: "What class is commonly used for dynamic lists in C#?",
+                                options: ["Array", "List<T>", "ArrayList", "Collection"],
+                                correctAnswer: "List<T>",
+                                explanation:
+                                    "List<T> from System.Collections.Generic allows dynamic resizing.",
+                            },
+                            {
+                                text: "Which method adds an item to a List in C#?",
+                                options: ["Insert()", "Add()", "Push()", "Append()"],
+                                correctAnswer: "Add()",
+                                explanation:
+                                    "Add() appends an element to the end of a List.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Objects & Classes",
+                        levelName: "Advanced",
+                        questions: [
+                            {
+                                text: "What is an object in C#?",
+                                options: ["A data type", "A variable that holds methods only", "An instance of a class", "A constant"],
+                                correctAnswer: "An instance of a class",
+                                explanation:
+                                    "An object is a concrete instance created from a class blueprint.",
+                            },
+                            {
+                                text: "What keyword is used to create an object?",
+                                options: ["create", "make", "new", "class"],
+                                correctAnswer: "new",
+                                explanation:
+                                    "The new keyword instantiates an object.",
+                            },
+                            {
+                                text: "What is the purpose of a constructor?",
+                                options: ["To destroy objects", "To initialize new objects", "To handle errors", "To print output"],
+                                correctAnswer: "To initialize new objects",
+                                explanation:
+                                    "Constructors initialize fields when an object is created.",
+                            },
+                            {
+                                text: "Which modifier allows class members to be accessed only inside the same class?",
+                                options: ["public", "protected", "private", "internal"],
+                                correctAnswer: "private",
+                                explanation:
+                                    "private members are accessible only within the class itself.",
                             },
                         ],
                     }

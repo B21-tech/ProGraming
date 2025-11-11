@@ -165,15 +165,15 @@ const seedQuestions = async () => {
                         questions: [
                             {
                                 text: "Which loop checks the condition before running?",
-                                options: ["for", "while", "do-while", "foreach"],
+                                options: ["for loop", "while", "do-while", "foreach"],
                                 correctAnswer: "while",
                                 explanation:
                                     "Python's while checks the condition first.",
                             },
                             {
                                 text: "Which loop iterates over items in a list?",
-                                options: ["while", "for", "do-while", "loop"],
-                                correctAnswer: "for",
+                                options: ["while", "for loop", "do-while", "loop"],
+                                correctAnswer: "for loop",
                                 explanation:
                                     "for loops iterate over iterable objects.",
                             },
@@ -197,6 +197,129 @@ const seedQuestions = async () => {
                                 correctAnswer: "for i in range(n)",
                                 explanation:
                                     "range(n) generates numbers from 0 to n-1.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Functions",
+                        levelName: "Intermediate",
+                        questions: [
+                            {
+                                text: "What keyword defines a function in Python?",
+                                options: ["func", "def", "define", "function"],
+                                correctAnswer: "def",
+                                explanation:
+                                    "Python functions begin with the keyword def.",
+                            },
+                            {
+                                text: "What happens if a function has no return statement?",
+                                options: ["It returns None", "It returns 0", "It causes an error", "It loops infinitely"],
+                                correctAnswer: "It returns None",
+                                explanation:
+                                    "Python functions without return automatically return None.",
+                            },
+                            {
+                                text: "What is the purpose of the return statement?",
+                                options: ["Ends the program", "Returns a value from a function", "Prints output", "Imports modules"],
+                                correctAnswer: "Returns a value from a function",
+                                explanation:
+                                    "return sends a value back to the caller.",
+                            },
+                            {
+                                text: "What is a default parameter?",
+                                options: ["Parameter that must be passed", "Parameter with a predefined value", "Parameter that is optional but required later", "A global variable"],
+                                correctAnswer: "Parameter with a predefined value",
+                                explanation:
+                                    "Default parameters take a preset value if no argument is given.",
+                            },
+                            {
+                                text: "What is recursion?",
+                                options: ["Loop inside a list", "Function calling itself", "Function inside another function", "Infinite loop"],
+                                correctAnswer: "Function calling itself",
+                                explanation:
+                                    "Recursion occurs when a function calls itself.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Lists & Tuples",
+                        levelName: "Intermediate",
+                        questions: [
+                            {
+                                text: "What's the difference between a list and a tuple?",
+                                options: ["Lists are immutable, tuples are mutable", "Lists are mutable, tuples are immutable", "Both are immutable", "Both are mutable"],
+                                correctAnswer: "Lists are mutable, tuples are immutable",
+                                explanation:
+                                    "Lists can be changed; tuples cannot.",
+                            },
+                            {
+                                text: "How do you create an empty list?",
+                                options: ["[]", "{}", "()", "empty[]"],
+                                correctAnswer: "[]",
+                                explanation:
+                                    "Square brackets create lists.",
+                            },
+                            {
+                                text: "What method adds an item to a list?",
+                                options: ["add()", "push()", "append()", "insert()"],
+                                correctAnswer: "append()",
+                                explanation:
+                                    "append() adds elements at the end of a list.",
+                            },
+                            {
+                                text: "What happens if you try to modify a tuple?",
+                                options: ["It changes value", "It returns None", "It raises an error", "It duplicates elements"],
+                                correctAnswer: "It raises an error",
+                                explanation:
+                                    "Tuples are immutable, so modification raises an error.",
+                            },
+                            {
+                                text: "What will len([1,2,3,4]) return?",
+                                options: ["3", "4", "5", "Error"],
+                                correctAnswer: "4",
+                                explanation:
+                                    "The len() function returns the number of elements.",
+                            },
+                        ],
+                    },
+                    {
+                        stageName: "Dictionaries",
+                        levelName: "Advanced",
+                        questions: [
+                            {
+                                text: "What are keys in a Python dictionary?",
+                                options: ["Values only", "Duplicates", "Unique identifiers", "Index numbers"],
+                                correctAnswer: "Unique identifiers",
+                                explanation:
+                                    "Keys uniquely identify values in a dictionary.",
+                            },
+                            {
+                                text: "Which syntax creates a dictionary?",
+                                options: ["dict = []", "dict = {}", "dict = ()", "dict = <>"],
+                                correctAnswer: "dict = {}",
+                                explanation:
+                                    "Curly braces {} define dictionaries.",
+                            },
+                            {
+                                text: "How do you access a value by key?",
+                                options: ["dict.key", "dict[key]", "dict(value)", "dict.getkey()"],
+                                correctAnswer: "dict[key]",
+                                explanation:
+                                    "You access values using square brackets and the key.",
+                            },
+                            {
+                                text: "What method removes a key-value pair?",
+                                options: ["remove", "delete", "pop()", "discard()"],
+                                correctAnswer: "pop()",
+                                explanation:
+                                    "pop() removes a key and returns its value.",
+                            },
+                            {
+                                text: "What happens if you use a list as a key?",
+                                options: ["Works fine", "Raises an error", "Converts it automatically", "Stores its memory address"],
+                                correctAnswer: "Raises an error",
+                                explanation:
+                                    "Lists are unhashable and can't be used as dictionary keys.",
                             },
                         ],
                     },

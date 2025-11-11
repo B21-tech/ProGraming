@@ -47,4 +47,35 @@ router.get("/:userId/full", userAuth, async (req, res) => {
 router.post("/registerCourse", userAuth, registerCourse);
 router.post("/switchCourse", userAuth, switchCourse);
 
+// Leasership board 
+router.get("/", userAuth, async (req, res) => {
+  try {
+    const users = await userModel.find({}, "username progress").lean();
+
+    // Compute total XP per user
+    const leaderboard = users.map((user) => {
+      let totalXP = 0;
+
+      if (user.progress) {
+        for (const [_, progressData] of Object.entries(user.progress)) {
+          totalXP += progressData.totalXP || 0;
+        }
+      }
+
+      return {
+        username: user.username,
+        totalXP
+      };
+    });
+
+    // Sort in descending order by total XP
+    leaderboard.sort((a, b) => b.totalXP - a.totalXP);
+
+    res.json({ success: true, leaderboard });
+  } catch (error) {
+    console.error("Leaderboard error:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 export default router;
