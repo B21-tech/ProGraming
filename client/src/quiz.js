@@ -38,6 +38,12 @@ function showQuestion() {
   nextBtn.style.display = "none";
   hasAnswered = false;
 
+  const sadSound = new Audio("../mainProcess/wrong_answer.mp3");
+  sadSound.volume = 0.5;
+
+  const cheerSound = new Audio("../mainProcess/correct_answer.mp3");
+  cheerSound.volume = 0.5;
+
   if (currentIndex >= questions.length) {
     container.innerHTML = `<h2 style="margin:0 0 16px;">🎯 Quiz Finished!<br>Your Score: ${score}/${questions.length}</h2>`;
     completeStage(score, questions.length);
@@ -77,9 +83,11 @@ function showQuestion() {
         btn.classList.add("correct");
         score++;
         explanationEl.innerHTML = `✅ <strong>Correct!</strong><br><small>${q.explanation || ""}</small>`;
+        cheerSound.play();
       } else {
         btn.classList.add("wrong");
         explanationEl.innerHTML = `❌ <strong>Incorrect.</strong> The correct answer was <b>${q.correctAnswer}</b>.<br><small>${q.explanation || ""}</small>`;
+        sadSound.play();
       }
 
       // Disable all options visually / interaction
@@ -166,10 +174,10 @@ async function completeStage(score, total) {
     const animationContainer = document.getElementById("animationContainer"); // For confetti or sad emoji
     const xpBar = document.getElementById("xpBar");
     const levelBanner = document.getElementById("levelUpBanner");
-    const nextBtn = document.getElementById("nextStageBtn");
+    // const nextBtn = document.getElementById("nextStageBtn");
     const backBtn = document.getElementById("backToStages");
-    const sadSound = document.getElementById("sadSound");
-    const cheerSound = document.getElementById("cheerSound");
+    const sadSound = new Audio("../mainProcess/stage_failed.mp3");
+    const cheerSound = new Audio("../mainProcess/stage_passed.mp3");
 
     animationContainer.innerHTML = ""; // Reset previous animations
     modal.classList.remove("hidden");
@@ -180,7 +188,7 @@ async function completeStage(score, total) {
       // Success path
       modalTitle.textContent = "🎉 Stage Complete!";
       modalMessage.textContent = `You unlocked the next stage! Score: ${score}/${total}`;
-      nextBtn.style.display = "inline-block";
+      // nextBtn.style.display = "inline-block";
 
       // Start confetti
       startConfetti();
@@ -205,7 +213,7 @@ async function completeStage(score, total) {
       modalTitle.textContent = "😔 Stage Incomplete";
       modalMessage.textContent = `You scored ${score}/${total}. You need 60% to unlock the next stage. You can do it! 💪`;
 
-      nextBtn.style.display = "none"; // Hide next stage button
+      // nextBtn.style.display = "none"; // Hide next stage button
 
       const sadEmoji = document.createElement("div");
       sadEmoji.textContent = "💔";

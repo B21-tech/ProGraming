@@ -602,6 +602,68 @@ button:active,
   animation: fillLoad 1.2s ease-out forwards;
 }
 
+.leaderboard {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  margin-top: 18px;
+}
+
+.leaderboard h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 15px;
+  color: #1f2937; /* darker text for better readability */
+}
+
+.leaderboard th,
+.leaderboard td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.leaderboard thead {
+  background: #f3f4f6;
+  font-weight: 700;
+  color: #111827;
+}
+
+.leaderboard tr {
+  transition: background 0.2s ease;
+}
+
+.leaderboard tr:hover {
+  background: #f9fafb;
+}
+
+/* Highlight the logged-in user */
+.highlight {
+  background: #dbeafe !important; /* soft blue highlight */
+  border-left: 4px solid #2563eb; /* vivid blue accent */
+  font-weight: 700;
+  color: #1e3a8a; /* dark blue text for contrast */
+}
+
+/* Muted message row */
+.muted {
+  text-align: center;
+  color: #6b7280;
+  padding: 12px 0;
+}
+
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .track>.fill.animate-fill {
