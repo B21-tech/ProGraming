@@ -7,6 +7,6 @@ This project uses a Node.js + MongoDB backend. Due to hosting constraints, scree
 <img src="images/caseStudy3.png">
 <img src="images/caseStudy4.png">
 <img src="images/caseStudy5.png">
-<img src="images/Progaming_login.png">
+<img src="images/ProGaming_login.png">
 
 
