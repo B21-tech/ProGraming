@@ -4,7 +4,7 @@ Building a game that will help assist tertiary students in understanding differe
 This project uses a Node.js + MongoDB backend. Due to hosting constraints, screenshots will be attached.
 
 <img src="images/CaseStudy1.png">
-<h5> Added a Leaderboard </h5>
+<h2> Added a Leaderboard </h2>
 <img src="images/Screenshot 2025-11-20 203252.png">
 <img src="images/CaseStudy2.png">
 <img src="images/caseStudy3.png">
