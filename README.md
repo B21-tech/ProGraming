@@ -12,7 +12,7 @@ This project uses a Node.js + MongoDB backend. Due to hosting constraints, scree
 <img src="images/ProGaming_career.png">
 <img src="images/ProGaming_dashboard.png">
 <img src="images/ProGaming_forget.png">
-<img src="images/Figma1.png">
-<img src="images/Figma2.png">
+<img src="images/Low1.png">
+<img src="images/Low2.png">
 
 
